@@ -1,10 +1,12 @@
+# Run pip install -r requirements.txt in terminal of this directory before running the script
+
 import nltk
 import csv
 from nltk.sentiment import SentimentIntensityAnalyzer
 
-nltk.download('popular')
+nltk.download('popular', 'vader_lexicon')
 
-with open('fb_news_comments_20K_hashed.csv', 'r') as csv_file:
+with open('fb_news_comments_20K_hashed.csv', 'r', encoding='utf8') as csv_file:
     # Read in first (n) lines of the csv_file
     head = [next(csv_file) for x in range(500)]
     csv_reader = csv.DictReader(head)
@@ -18,7 +20,7 @@ with open('fb_news_comments_20K_hashed.csv', 'r') as csv_file:
         # convert all the messages from the csv into one string
         all_messages += row['message']
 
-        # add results to dictionary
+        # add results to dictionarycd
         sentiment_dict = {
             'negative': sia.polarity_scores(row['message'])['neg'],
             'neutral': sia.polarity_scores(row['message'])['neu'],
@@ -50,7 +52,7 @@ with open('fb_news_comments_20K_hashed.csv', 'r') as csv_file:
         word_frequency.append(dict_freq)
 
     # write to a csv file the sentiment analysis scores and the corresponding message
-    with open('sentiment_analysis.csv', 'w') as new_file:
+    with open('sentiment_analysis.csv', 'w', encoding='utf8') as new_file:
         fieldnames = ['negative', 'neutral', 'positive', 'compound', 'message']
         csv_writer = csv.DictWriter(
             new_file, fieldnames=fieldnames, delimiter=',')
@@ -60,7 +62,7 @@ with open('fb_news_comments_20K_hashed.csv', 'r') as csv_file:
             csv_writer.writerow(entry)
 
     # write to a csv file the most common words and their frequency
-    with open('word_frequency.csv', 'w') as new_file:
+    with open('word_frequency.csv', 'w', encoding='utf8') as new_file:
         fieldnames = ['word', 'frequency']
         csv_writer = csv.DictWriter(
             new_file, fieldnames=fieldnames, delimiter=',')
@@ -70,3 +72,4 @@ with open('fb_news_comments_20K_hashed.csv', 'r') as csv_file:
             csv_writer.writerow(entry)
 
 csv_file.close()
+print('Created Files...')
