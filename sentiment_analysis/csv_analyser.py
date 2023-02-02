@@ -2,13 +2,15 @@ import nltk
 import csv
 from nltk.sentiment import SentimentIntensityAnalyzer
 
+nltk.download('popular')
+nltk.download('vader_lexicon')
 # step into setimental_analysis folder
 # import os
 # print(os.getcwd())
 # os.chdir(os.getcwd() + "\\sentiment_analysis")
 # print(os.getcwd())
 
-nltk.download('popular', 'vader_lexicon')
+
 with open('fb_news_comments_20K_hashed.csv', 'r', encoding='utf8') as csv_file:
     # Read in first (n) lines of the csv_file
     head = [next(csv_file) for x in range(500)]
