@@ -25,3 +25,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+# Custom files
+sentiment_analysis\sentiment_analysis.csv
+sentiment_analysis\sentiment_analysis.csv
+sentiment_analysis/sentiment_analysis.csv
