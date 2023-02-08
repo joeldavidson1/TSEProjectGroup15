@@ -20,8 +20,9 @@ function setup()
     console.log(frequencies); 
 
     // get html elements
-    const ctx_cloud = document.getElementById("canvas").getContext("2d");
-    const ctx_dough = document.getElementById('dough');
+    const ctx_cloud = document.getElementById("cloud").getContext("2d");
+    const ctx_dough = document.getElementById('dough');    
+  var ctx_stacked = document.getElementById("stacked");
   
     // Doughnut Chart
     new Chart(ctx_dough, {
@@ -44,7 +45,6 @@ function setup()
     });
   
   // Stacked Bar Chart
-  var ctx_stacked = document.getElementById("stacked");
   var myChart = new Chart(ctx_stacked, {
       type: 'bar',
       data: {
@@ -95,6 +95,7 @@ function setup()
       }
   });
   
+  // Word Cloud
   new Chart(ctx_cloud, {
     type: "wordCloud",
     data: {
@@ -107,15 +108,28 @@ function setup()
       ]
     },
     options: {
-      title: {
-        display: false,
-        text: "Chart.js Word Cloud"
-      },
-      plugins: {
-        legend: {
-          display: false
-        }
-      }
+        title: {
+          display: false,
+          text: "Chart.js Word Cloud"
+        },
+        color: "black",
+        family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+        hoverColor: "red",
+        lineHeight: 100,
+        maxRotation: 0,
+        minRotation: -90,
+        padding: 1,
+        rotate: 45,
+        rotationSteps: 3,
+        size: 30,
+        string: "normal normal 90px 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+        style: "normal",
+        weight: "bold",
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },     
     }
   });
 }
