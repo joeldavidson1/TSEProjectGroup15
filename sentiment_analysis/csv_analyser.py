@@ -47,7 +47,7 @@ with open('sentiment_analysis\\fb_news_comments_20K_hashed.csv', 'r', encoding='
 
     # Top (n) most common words and their frequency in a list of dictionaries
     freq = nltk.FreqDist(all_words)
-    most_common_words = freq.most_common(25)
+    most_common_words = freq.most_common(100)
     word_frequency = []
     for i in most_common_words:
         dict_freq = {
