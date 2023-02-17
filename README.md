@@ -11,4 +11,4 @@ Run the following commands in your terminal:
 
 To run the Streamlit app, enter into your terminal - streamlit run <file_location>
 
-Replacing the file_location with the csv_anaylser.py location on your system.
+Replacing the <file_location> with the csv_anaylser.py location on your system.
