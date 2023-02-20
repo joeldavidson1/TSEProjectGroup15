@@ -8,7 +8,9 @@ Run the following commands in your terminal:
 * pip install pandas
 * pip install streamlit
 * pip install wordcloud
+* pip install plotly
 
 To run the Streamlit app, enter into your terminal - streamlit run <file_location>
+(ensure the terminal is in the TSE Directory)
 
-Replacing the <file_location> with the csv_anaylser.py location on your system.
+Replacing the <file_location> with the full path to csv_anaylser.py on your system.
