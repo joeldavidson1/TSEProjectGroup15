@@ -1,7 +1,6 @@
 import streamlit as st
-#from wordcloud import WordCloud
 from analyzer import Analyzer
-
+from wordcloud import WordCloud
 import chart
 
 #-----------Analysis-----------------

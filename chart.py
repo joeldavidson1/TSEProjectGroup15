@@ -1,5 +1,6 @@
 import streamlit as st
 import plotly.express as px
+from wordcloud import WordCloud
 
 def pie_chart(dataset):
     mean_negative = dataset["negative"].mean()
@@ -20,7 +21,7 @@ def word_cloud(dataset):
     text = dataset['word'].values
     string_text = ' '.join(text)
 
-    #wc = WordCloud().generate(string_text)
+    wc = WordCloud().generate(string_text)
 
-    #st.caption('Most common words')
-    #st.image(wc.to_array(), width=650)
+    st.caption('Most common words')
+    st.image(wc.to_array(), width=650)
