@@ -17,14 +17,18 @@ st.set_page_config(page_title='Facebook Sentimental Analysis',
 st.title('Facebook Sentiment Analysis')
 
 # display the results on the webpage 
+
 st.caption('This is the NLTK results of the Facebook comments')
 st.dataframe(na.sia_results)
 
 st.caption('These are the top most 50 common words')
 st.dataframe(na.frequency_results)
 
-chart.word_cloud(na.frequency_results) # needs fixing as word cloud pip doesn't work
+st.caption('Word Cloud showing highest frequency words in the whole dataset')
+chart.word_cloud(na.frequency_results)
 
+st.caption('The overall sentiment of the dataset')
 chart.pie_chart(na.sia_results)
 
-
+st.caption('The sentiment by post name')
+chart.display_filtered_pie_chart(na)
