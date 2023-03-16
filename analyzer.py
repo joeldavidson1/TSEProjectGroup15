@@ -12,10 +12,14 @@ class Analyzer:
     sia_results = pd.DataFrame()
     frequency_results = pd.DataFrame()
 
-    def __init__(self, path):
-        self.dataframe = pd.read_csv(path, nrows=50, encoding='utf8')
-        # allows pandas to use the full comment instead of shortening it
-        pd.set_option('display.max_colwidth', None)        
+    def __init__(self, path=None):
+        if path:
+            self.dataframe = pd.read_csv(path, nrows=50, encoding='utf8')
+            # allows pandas to use the full comment instead of shortening it
+            pd.set_option('display.max_colwidth', None)
+        else:
+            self.dataframe = pd.DataFrame()
+     
 
     def calc_sentiment(self):        
         sia = SentimentIntensityAnalyzer()      
@@ -55,3 +59,24 @@ class Analyzer:
             }
             self.word_frequency.append(dict_freq)        
         self.frequency_results = pd.DataFrame(self.word_frequency)
+
+    def filter_by_post(self, post_id):
+        filtered_data = self.dataframe[self.dataframe['post_name'] == post_id]
+        return filtered_data
+
+    def calc_sentiment_filtered(self, dataframe):
+        sia = SentimentIntensityAnalyzer()
+        analysis_results_filtered = []
+
+        for index, row in (dataframe.iterrows()):
+            sentiment_dict = {
+                'negative': sia.polarity_scores(row['message'])['neg'],
+                'neutral': sia.polarity_scores(row['message'])['neu'],
+                'positive': sia.polarity_scores(row['message'])['pos'],
+                'compound': sia.polarity_scores(row['message'])['compound'],
+                'message': row['message']
+            }
+            analysis_results_filtered.append(sentiment_dict)
+
+        sia_results_filtered = pd.DataFrame(analysis_results_filtered)
+        return sia_results_filtered

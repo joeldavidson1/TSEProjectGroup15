@@ -2,7 +2,8 @@
 
 When running the program for the first time please follow the following instructions:
 
-1.make sure you are running python 3.7.9 in vs code. 
+1.make sure you are running python 3.7.9 use the windows x86 executable installer in vs code. 
+https://www.python.org/downloads/release/python-379/
 In the bottom corner of vs code it should say the python version of your interpreter. if it's incorrect select a different interpreter using ctrl + shift + p -> select interpreter.
 
 create a venv using ctrl + shift + p then create environment and select the interpreter

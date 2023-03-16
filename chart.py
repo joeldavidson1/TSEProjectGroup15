@@ -2,7 +2,7 @@ import streamlit as st
 import plotly.express as px
 from wordcloud import WordCloud
 
-def pie_chart(dataset):
+def pie_chart(dataset, title='Overall Sentiment'):
     mean_negative = dataset["negative"].mean()
     mean_positive = dataset["positive"].mean()
     mean_neutral = dataset["neutral"].mean()
@@ -11,7 +11,7 @@ def pie_chart(dataset):
     names = ['negative', 'positive', 'neutral']
     fig = px.pie(values=means, names=names) # need to add colours to chart 
 
-    st.caption('Overall Sentiment')
+    st.caption(title)
     st.plotly_chart(fig)
 
 
