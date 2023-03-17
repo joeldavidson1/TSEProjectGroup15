@@ -22,7 +22,8 @@ To run the Streamlit app, enter into your terminal
 The first time it may take a while downloading all the NLTK packages.
 
 The app is hosted using the release branch. Please see the url below:
-https://v-zak-tseprojectgroup15-app-release-o9dn10.streamlit.app/
+
+https://joeldavidson1-tseprojectgroup15-app-release-4gxs7r.streamlit.app
 
 ## Unit testing:
 
