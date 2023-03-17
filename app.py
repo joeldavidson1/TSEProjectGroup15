@@ -3,20 +3,21 @@ from analyzer import Analyzer
 from wordcloud import WordCloud
 import chart
 
-#-----------Analysis-----------------
+# -----------Analysis-----------------
 # analyzing the input csv file
 na = Analyzer('dataset/fb_news_comments_20K_hashed.csv')
+na.get_all_comments()
 na.calc_sentiment()
-na.calc_word_frequency()
+na.create_word_frequency_dataframe()
 
-#-----------Webpage setout-----------
+# -----------Webpage setout-----------
 st.set_page_config(page_title='Facebook Sentimental Analysis',
                    layout='wide'
                    )
 
 st.title('Facebook Sentiment Analysis')
 
-# display the results on the webpage 
+# display the results on the webpage
 
 st.caption('This is the NLTK results of the Facebook comments')
 st.dataframe(na.sia_results)
