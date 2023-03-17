@@ -24,3 +24,10 @@ The first time it may take a while downloading all the NLTK packages.
 The app is hosted using the release branch. Please see the url below:
 https://v-zak-tseprojectgroup15-app-release-o9dn10.streamlit.app/
 
+## Unit testing:
+
+Ensure you have pytest intalled, follow instructions above (already included in requirements.txt) or enter into terminal:
+
+pip install -U pytest
+
+To run pytest, ensure you're in the project directory and enter into terminal 'pytest'
