@@ -2,6 +2,8 @@ import pandas as pd
 import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
 
+import chart
+
 nltk.download('popular')
 nltk.download('vader_lexicon')
 
@@ -22,6 +24,7 @@ class Analyzer:
         self.sia_results = pd.DataFrame()
         self.frequency_results = pd.DataFrame()
 
+    # calc sentiment for each comment and store as a dataframe
     def calc_sentiment(self):
         sia = SentimentIntensityAnalyzer()
 
@@ -38,7 +41,7 @@ class Analyzer:
             }
             self.analysis_results.append(sentiment_dict)
             self.sia_results = pd.DataFrame(self.analysis_results)
-
+  
     def calc_word_frequency(self):
         all_words = parse_messages_for_analysis(self.all_comments)
 
@@ -59,6 +62,7 @@ class Analyzer:
             self.word_frequency.append(dict_freq)
         self.frequency_results = pd.DataFrame(self.word_frequency)
 
+    # return comments matching post_id
     def filter_by_post(self, post_id):
         filtered_data = self.sia_results[self.sia_results['from_post_id'] == post_id]
         return filtered_data
@@ -66,6 +70,19 @@ class Analyzer:
     def get_all_comments(self):
         # convert all the comments from the csv into one string
         self.all_comments = self.dataframe['message'].sum()
+
+    # colour cell based on value relative to boundaries
+    def colour_sentiment(self, val):
+        boundary1 = -0.2
+        boundary2 = 0.2
+        if val < boundary1:
+            colour = 'red'
+        elif val < boundary2:
+            colour = 'orange'
+        else:
+            colour = 'green'
+        return f'background-color: {colour}'
+
 
 
 def tokenize_words(comments: str):
