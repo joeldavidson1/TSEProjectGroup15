@@ -18,7 +18,6 @@ st.set_page_config(page_title='Facebook Sentimental Analysis',
 st.title('Facebook Sentiment Analysis')
 
 # display the results on the webpage
-
 st.caption('This is the NLTK results of the Facebook comments')
 st.dataframe(na.sia_results)
 
@@ -31,5 +30,5 @@ chart.word_cloud(na.frequency_results)
 st.caption('The overall sentiment of the dataset')
 chart.pie_chart(na.sia_results)
 
-st.caption('The sentiment by post name')
-chart.display_filtered_pie_chart(na)
+st.caption('The Sentiment by Post')
+chart.display_post_sentiment(na)

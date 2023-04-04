@@ -27,12 +27,14 @@ class Analyzer:
 
         for index, row in (self.dataframe.iterrows()):
             # append the sentiment analysis results to a dictionary
+            # retain key info such as comment and post id
             sentiment_dict = {
+                'from_post': row['post_name'],
                 'negative': sia.polarity_scores(row['message'])['neg'],
                 'neutral': sia.polarity_scores(row['message'])['neu'],
                 'positive': sia.polarity_scores(row['message'])['pos'],
                 'compound': sia.polarity_scores(row['message'])['compound'],
-                'message': row['message']
+                'comment': row['message']
             }
             self.analysis_results.append(sentiment_dict)
             self.sia_results = pd.DataFrame(self.analysis_results)
@@ -58,25 +60,8 @@ class Analyzer:
         self.frequency_results = pd.DataFrame(self.word_frequency)
 
     def filter_by_post(self, post_id):
-        filtered_data = self.dataframe[self.dataframe['post_name'] == post_id]
+        filtered_data = self.sia_results[self.sia_results['from_post'] == post_id]
         return filtered_data
-
-    def calc_sentiment_filtered(self, dataframe):
-        sia = SentimentIntensityAnalyzer()
-        analysis_results_filtered = []
-
-        for index, row in (dataframe.iterrows()):
-            sentiment_dict = {
-                'negative': sia.polarity_scores(row['message'])['neg'],
-                'neutral': sia.polarity_scores(row['message'])['neu'],
-                'positive': sia.polarity_scores(row['message'])['pos'],
-                'compound': sia.polarity_scores(row['message'])['compound'],
-                'message': row['message']
-            }
-            analysis_results_filtered.append(sentiment_dict)
-
-        sia_results_filtered = pd.DataFrame(analysis_results_filtered)
-        return sia_results_filtered
 
     def get_all_comments(self):
         # convert all the comments from the csv into one string
