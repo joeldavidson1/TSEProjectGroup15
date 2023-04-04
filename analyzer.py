@@ -29,7 +29,7 @@ class Analyzer:
             # append the sentiment analysis results to a dictionary
             # retain key info such as comment and post id
             sentiment_dict = {
-                'from_post': row['post_name'],
+                'from_post_id': row['from_post_id'],
                 'negative': sia.polarity_scores(row['message'])['neg'],
                 'neutral': sia.polarity_scores(row['message'])['neu'],
                 'positive': sia.polarity_scores(row['message'])['pos'],
@@ -60,7 +60,7 @@ class Analyzer:
         self.frequency_results = pd.DataFrame(self.word_frequency)
 
     def filter_by_post(self, post_id):
-        filtered_data = self.sia_results[self.sia_results['from_post'] == post_id]
+        filtered_data = self.sia_results[self.sia_results['from_post_id'] == post_id]
         return filtered_data
 
     def get_all_comments(self):

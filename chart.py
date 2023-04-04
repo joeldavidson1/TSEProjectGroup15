@@ -19,7 +19,7 @@ def pie_chart(dataset, title='Overall Sentiment'):
 
 def select_post(analyzer):
     # get unique posts
-    unique_post_ids = analyzer.dataframe["post_name"].unique()
+    unique_post_ids = analyzer.dataframe["from_post_id"].unique()
     # create select box with all unique values
     return st.selectbox("Select a post:", unique_post_ids)
 
