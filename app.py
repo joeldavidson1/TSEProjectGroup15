@@ -18,17 +18,24 @@ st.set_page_config(page_title='Facebook Sentimental Analysis',
 st.title('Facebook Sentiment Analysis')
 
 # display the results on the webpage
-st.caption('This is the NLTK results of the Facebook comments')
-st.dataframe(na.sia_results)
 
-st.caption('These are the top most 50 common words')
-st.dataframe(na.frequency_results)
+# overall sentiment
+st.subheader('Overall')
+col1, col2 = st.columns(2)
+with col1:
+    st.caption('The dataset:')
+    st.dataframe(na.sia_results.style.applymap(na.colour_sentiment, subset=['compound']))
 
-st.caption('Word Cloud showing highest frequency words in the whole dataset')
-chart.word_cloud(na.frequency_results)
+with col2:
+    chart.pie_chart(na.sia_results)
 
-st.caption('The overall sentiment of the dataset')
-chart.pie_chart(na.sia_results)
+st.subheader('Word Frequencies')
+col1, col2 = st.columns(2)
+with col1:
+    st.caption('These are the top most 50 common words:')
+    st.dataframe(na.frequency_results)
+with col2:
+    chart.word_cloud(na.frequency_results, 'Word Cloud of the most common words:')
 
-st.caption('The Sentiment by Post')
+st.subheader('Sentiment by Post')
 chart.display_post_sentiment(na)

@@ -3,7 +3,7 @@ import plotly.express as px
 from wordcloud import WordCloud
 
 # show average sentiment of dataset in a pie chart
-def pie_chart(dataset, title='Overall Sentiment'):
+def pie_chart(dataset, title='Overall Sentiment:'):
     # mean each sentiment type
     mean_negative = dataset["negative"].mean()
     mean_positive = dataset["positive"].mean()
@@ -36,23 +36,24 @@ def display_post_sentiment(analyzer):
     st.caption('Post')
     st.caption('post contents here..........') #add post content so there is context for sentiment
 
+    col1, col2 = st.columns(2)
+
     # Display comments
-    st.caption('Post Comments')
-    comments = filtered_data['comment']
-    st.dataframe(comments)
+    with col1:
+        st.caption('Post Comments:')
+        comments = filtered_data['comment']
+        st.dataframe(comments)
 
-    # Display pie chart
-    pie_chart(filtered_data, title=f'Sentiment for post {selected_post_id}')
+    with col2:
+        # Display pie chart
+        pie_chart(filtered_data, title='Sentiment for Post Comments:')
 
-
-
-
-def word_cloud(dataset):
+def word_cloud(dataset, title):
     # Generating word cloud
     text = dataset['word'].values
     string_text = ' '.join(text)
 
     wc = WordCloud().generate(string_text)
 
-    st.caption('Most common words')
+    st.caption(title)
     st.image(wc.to_array(), width=650)
