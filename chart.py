@@ -17,18 +17,35 @@ def pie_chart(dataset, title='Overall Sentiment'):
     st.caption(title)
     st.plotly_chart(fig)
 
+def select_post(analyzer):
+    # get unique posts
+    unique_post_ids = analyzer.dataframe["from_post_id"].unique()
+    # create select box with all unique values
+    return st.selectbox("Select a post:", unique_post_ids)
+
+
 # show the average sentiment of a specific post
-def display_filtered_pie_chart(analyzer):
+def display_post_sentiment(analyzer):
     # Get unique post_ids
-    unique_post_ids = analyzer.dataframe["post_name"].unique()
-    selected_post_id = st.selectbox("Select a post:", unique_post_ids)
+    selected_post_id = select_post(analyzer)  #need to change to post name on drop down
 
     # Filter data and calculate sentiment
-    filtered_data = analyzer.filter_by_post(selected_post_id).copy() #need to change to post name on drop down
-    filtered_sia_results = analyzer.calc_sentiment_filtered(filtered_data)
+    filtered_data = analyzer.filter_by_post(selected_post_id).copy()
+
+    # Display post
+    st.caption('Post')
+    st.caption('post contents here..........') #add post content so there is context for sentiment
+
+    # Display comments
+    st.caption('Post Comments')
+    comments = filtered_data['comment']
+    st.dataframe(comments)
 
     # Display pie chart
-    pie_chart(filtered_sia_results, title=f'Sentiment for post {selected_post_id}')
+    pie_chart(filtered_data, title=f'Sentiment for post {selected_post_id}')
+
+
+
 
 def word_cloud(dataset):
     # Generating word cloud
