@@ -1,8 +1,8 @@
 # TSE Group 15: Facebook Sentimental Analysis
 
-When running the program for the first time please follow the following instructions:
+When running the program for the first time please follow the instructions below:
 
-1.make sure you are running python 3.7.9 use the windows x86 executable installer in vs code. 
+1. Make sure you are running python 3.7.9 use the windows x86 executable installer in vs code. 
 https://www.python.org/downloads/release/python-379/
 In the bottom corner of vs code it should say the python version of your interpreter. if it's incorrect select a different interpreter using ctrl + shift + p -> select interpreter.
 
@@ -20,6 +20,9 @@ press Enter. After it should open a web page.
 To run the Streamlit app, enter into your terminal
 * streamlit run app.py
 The first time it may take a while downloading all the NLTK packages.
+
+To run unit tests:
+Ensure you're in the project directory, enter into terminal 'pytest'
 
 The app is hosted using the release branch. Please see the url below:
 
