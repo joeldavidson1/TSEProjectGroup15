@@ -1,0 +1,119 @@
+*{
+    margin: 0;
+    padding: 3.5;
+    box-sizing: border-box;
+    font-size: 15;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+#header,footer{
+   
+}
+#header h1{
+    color: black;
+    text-align: center;
+    margin: auto;
+    padding: 7.5px 7.5px;
+}
+
+
+#logo{
+    float: left;
+    padding: -5px -10px;
+
+}
+#nav{
+    background-color: black;
+
+}
+#nav ul{
+    list-style: none;
+    text-align: center;
+}
+#nav li{
+    font-size: 20pt;
+    display: inline-block;
+}
+
+
+
+#di .img{
+
+    text-align: auto;
+    margin: left;
+    width: (2000 x 420);
+}
+
+#nav a{
+    text-decoration: none;
+
+    display: block;
+    padding: 7.5px 7.5px;
+}
+
+#nav a:hover{
+    background-color: white;
+    transition-duration: 250ms;
+}
+#nav a.active{
+    background-color: white;
+    color: #444;
+}
+
+
+
+
+#split{
+    display: flex;
+    min-height: 650px;
+}
+#content .section:first-child{
+    flex: 60%;
+}
+#content .section:last-child{
+    flex: 40%;
+    position: relative;
+    
+}
+#section hr { 
+    display: block;
+    margin-top: 0.5em;
+
+    border-width: 1px;
+  }
+#section p {
+    padding-top: 250px;
+} 
+#content img{
+    width: 90%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    
+}
+.img-with-text {
+    text-align: justify;
+    width: (8000 x 420);
+}
+
+.img-with-text img {
+    display: block;
+    margin: 0 auto;
+}
+
+.img-with-text p{
+    margin-top: 350px;
+}
+
+#wrapper{
+    width: 75%;
+    margin: 0 auto;
+
+}
+#footer{
+    background-color: black;
+}
+#footer p{
+    color: white;
+    text-align:right;
+    padding: 5px 0;
+}
