@@ -21,27 +21,27 @@ def pie_chart(dataset, title='Overall Sentiment:'):
     st.plotly_chart(fig)
 
 
-def select_post(analyzer):
+def select_post(analyser):
     # get unique posts
-    unique_post_ids = analyzer.dataframe["from_post_id"].unique()
+    unique_post_ids = analyser.dataframe["from_post_id"].unique()
     # create select box with all unique values
     return st.selectbox("Select a post:", unique_post_ids)
 
 
 # show the average sentiment of a specific post
-def display_post_sentiment(analyzer, nltk_analyser: bool):
+def display_post_sentiment(analyser, nltk_analyser: bool):
     # Get unique post_ids
     # need to change to post name on drop down
-    selected_post_id = select_post(analyzer)
+    selected_post_id = select_post(analyser)
 
     # Filter data and calculate sentiment
-    filtered_data = analyzer.filter_by_post(
+    filtered_data = analyser.filter_by_post(
         selected_post_id, nltk_analyser).copy()
 
     # Display post
-    st.caption('Post')
+    #st.caption('Post')
     # add post content so there is context for sentiment
-    st.caption('post contents here..........')
+    #st.caption('post contents here..........')
 
     col1, col2 = st.columns(2)
 
@@ -53,7 +53,7 @@ def display_post_sentiment(analyzer, nltk_analyser: bool):
 
     with col2:
         # Display pie chart
-        pie_chart(filtered_data, title='Sentiment for Post Comments:')
+        pie_chart(filtered_data, title='Mean Sentiment for Post Comments:')
 
 
 def word_cloud(dataset, title):

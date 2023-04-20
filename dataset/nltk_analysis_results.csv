@@ -1,6 +1,6 @@
-from_post_id,negative,neutral,positive,compound,comment
-33661642d99eeceeb086_10154890879532217,0.0,0.533,0.467,0.7845,We are speaking to NRA supporters as well as Women's March supporters
-33661642d99eeceeb086_10154890879532217,0.146,0.759,0.095,-0.4019,If you are just joining us we are outside of the headquarters of the National Rifle Association outside of Washington DC. The Women's March are demonstrating and then marching to the Department of Justice to protest a controversial commercial and the verdict of Philando Castile's death
-142b054b9d7f119260fa_10154890879532217,0.174,0.826,0.0,-0.6696,Do you know how backward America are in allowing people to have guns? 19 kids per day die in the USA by accidental shootings.... Constitutional rights! Get a grip.
-52228acb5d5ca468be8c_10154890879532217,0.063,0.761,0.176,0.5106,People who legally own guns often seem all too eager for an opportunity to shoot someone. Statistics show that guns bought 'for protection' very rarely get used as intended. Ask any ER doctor.
-af7fe02906a110370810_10154890879532217,0.09,0.709,0.201,0.4588,Have you snowflakes watched the news and seen how many lives could have been saved had they had a gun to protect themselves?
+negative,neutral,positive,compound,comment,from_post_id
+0.0,0.533,0.467,0.7845,We are speaking to NRA supporters as well as Women's March supporters,33661642d99eeceeb086_10154890879532217
+0.146,0.759,0.095,-0.4019,If you are just joining us we are outside of the headquarters of the National Rifle Association outside of Washington DC. The Women's March are demonstrating and then marching to the Department of Justice to protest a controversial commercial and the verdict of Philando Castile's death,33661642d99eeceeb086_10154890879532217
+0.174,0.826,0.0,-0.6696,Do you know how backward America are in allowing people to have guns? 19 kids per day die in the USA by accidental shootings.... Constitutional rights! Get a grip.,142b054b9d7f119260fa_10154890879532217
+0.063,0.761,0.176,0.5106,People who legally own guns often seem all too eager for an opportunity to shoot someone. Statistics show that guns bought 'for protection' very rarely get used as intended. Ask any ER doctor.,52228acb5d5ca468be8c_10154890879532217
+0.09,0.709,0.201,0.4588,Have you snowflakes watched the news and seen how many lives could have been saved had they had a gun to protect themselves?,af7fe02906a110370810_10154890879532217
