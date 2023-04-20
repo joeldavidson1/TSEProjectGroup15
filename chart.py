@@ -29,13 +29,14 @@ def select_post(analyzer):
 
 
 # show the average sentiment of a specific post
-def display_post_sentiment(analyzer):
+def display_post_sentiment(analyzer, nltk_analyser: bool):
     # Get unique post_ids
     # need to change to post name on drop down
     selected_post_id = select_post(analyzer)
 
     # Filter data and calculate sentiment
-    filtered_data = analyzer.filter_by_post(selected_post_id).copy()
+    filtered_data = analyzer.filter_by_post(
+        selected_post_id, nltk_analyser).copy()
 
     # Display post
     st.caption('Post')
@@ -63,4 +64,4 @@ def word_cloud(dataset, title):
     wc = WordCloud().generate(string_text)
 
     st.caption(title)
-    st.image(wc.to_array(), width=650)
+    st.image(wc.to_array(), width=550)

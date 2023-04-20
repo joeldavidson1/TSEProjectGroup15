@@ -15,19 +15,21 @@ import csv_writer
 class Analyser:
 
     def __init__(self):
-            # load in precomputed sentiments
-            self.sia_results = pd.read_csv('dataset/nltk_analysis_results.csv', encoding='utf8')
-            self.roberta_results = pd.read_csv('dataset/roberta_analysis_results.csv', encoding='utf8')
-            # read in the same data from the dataset
-            rows = len(self.sia_results)
-            self.dataframe = pd.read_csv('dataset/fb_news_comments_20K_hashed.csv', nrows = rows,encoding='utf8')
-            # allows pandas to use the full comment instead of shortening it
-            pd.set_option('display.max_colwidth', None)
+        # load in precomputed sentiments
+        self.sia_results = pd.read_csv(
+            'dataset/nltk_analysis_results.csv', encoding='utf8')
+        self.roberta_results = pd.read_csv(
+            'dataset/roberta_analysis_results.csv', encoding='utf8')
+        # read in the same data from the dataset
+        rows = len(self.sia_results)
+        self.dataframe = pd.read_csv(
+            'dataset/fb_news_comments_20K_hashed.csv', nrows=rows, encoding='utf8')
+        # allows pandas to use the full comment instead of shortening it
+        pd.set_option('display.max_colwidth', None)
 
-            # use precomputed info
-            self.all_comments = self.get_all_comments()
-            self.word_frequency = []        
-
+        # use precomputed info
+        self.all_comments = self.get_all_comments()
+        self.word_frequency = []
 
     def calc_word_frequency(self):
         all_words = parse_messages_for_analysis(self.all_comments)
@@ -50,8 +52,12 @@ class Analyser:
         self.frequency_results = pd.DataFrame(self.word_frequency)
 
     # return comments matching post_id
-    def filter_by_post(self, post_id):
-        filtered_data = self.sia_results[self.sia_results['from_post_id'] == post_id]
+    def filter_by_post(self, post_id, nltk_option: bool):
+        if nltk_option:
+            filtered_data = self.sia_results[self.sia_results['from_post_id'] == post_id]
+        else:
+            filtered_data = self.roberta_results[self.roberta_results['from_post_id'] == post_id]
+
         return filtered_data
 
     # convert all the comments from the csv into one string
