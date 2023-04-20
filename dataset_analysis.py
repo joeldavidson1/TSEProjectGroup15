@@ -13,7 +13,7 @@ def dataset_analysis_UI():
             """)
     st.sidebar.write("""
     ## About
-    This is a statistical analysis of several thousand Facebook comments from...
+    This is a statistical analysis of several thousand Facebook comments from the dataset: https://github.com/jbencina/facebook-news. The analysis aims to show the polarizing nature of facebook comments.
     """)
 
     model = st.selectbox("Select a model", [
@@ -77,7 +77,7 @@ def dataset_analysis_UI():
 
 def analyser():
     # -----------Analysis-----------------
-    # analyzing the input csv file
+    # analysing the input csv file
     na = Analyser()
     na.get_all_comments()
     na.create_word_frequency_dataframe()

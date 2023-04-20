@@ -4,7 +4,7 @@ import dataset_analysis
 from precompute import Precompute
 
 
-@st.cache
+@st.cache_data
 # allows heavy computation to run only once
 def pre_compute_analysis():
     p = Precompute()

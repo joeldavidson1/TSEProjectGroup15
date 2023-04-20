@@ -11,14 +11,15 @@ from scipy.special import softmax
 
 class Sentiment_Analyser:
 
-    def __init__(self, path, rows):
+    def __init__(self, path = None, rows = 1):
         self.dataframe = pd.DataFrame()
         if path:
             self.dataframe = pd.read_csv(path, nrows=rows, encoding='utf8')
-            # allows pandas to use the full comment instead of shortening it
-            pd.set_option('display.max_colwidth', None)
         else:
             self.dataframe = pd.DataFrame()
+
+        # allows pandas to use the full comment instead of shortening it
+        pd.set_option('display.max_colwidth', None)
 
     # calc nltk sentiment
     def calc_nltk_sentiment(self):
@@ -27,13 +28,13 @@ class Sentiment_Analyser:
         for index, row in (self.dataframe.iterrows()):
             # append the sentiment analysis results to a dictionary
             # retain key info such as comment and post id
-            sia_sentiment_dict = {
-                'from_post_id': row['from_post_id'],
+            sia_sentiment_dict = {                
                 'negative': sia.polarity_scores(row['message'])['neg'],
                 'neutral': sia.polarity_scores(row['message'])['neu'],
                 'positive': sia.polarity_scores(row['message'])['pos'],
                 'compound': sia.polarity_scores(row['message'])['compound'],
-                'comment': row['message']
+                'comment': row['message'],
+                'from_post_id': row['from_post_id']
             }            
             # append the dictionaries to the list of dicts
             nltk_analysis_results.append(sia_sentiment_dict)

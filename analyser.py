@@ -6,7 +6,8 @@ from transformers import AutoModelForSequenceClassification
 from scipy.special import softmax
 
 import chart
-import csv_writer
+import csv_handler
+from sentiment_analyser import Sentiment_Analyser
 
 # nltk.download('popular')
 # nltk.download('vader_lexicon')
@@ -14,16 +15,28 @@ import csv_writer
 
 class Analyser:
 
-    def __init__(self):
-        # load in precomputed sentiments
-        self.sia_results = pd.read_csv(
-            'dataset/nltk_analysis_results.csv', encoding='utf8')
-        self.roberta_results = pd.read_csv(
-            'dataset/roberta_analysis_results.csv', encoding='utf8')
-        # read in the same data from the dataset
-        rows = len(self.sia_results)
-        self.dataframe = pd.read_csv(
-            'dataset/fb_news_comments_20K_hashed.csv', nrows=rows, encoding='utf8')
+    def __init__(self, input_dataframe = None):
+        if input_dataframe is None:
+            # load in precomputed sentiments
+            self.sia_results = pd.read_csv(
+                'dataset/nltk_analysis_results.csv', encoding='utf8')
+            self.roberta_results = pd.read_csv(
+                'dataset/roberta_analysis_results.csv', encoding='utf8')
+            # read in the same data from the dataset
+            rows = len(self.sia_results)
+            self.dataframe = pd.read_csv(
+                'dataset/fb_news_comments_20K_hashed.csv', nrows=rows, encoding='utf8')
+        else:
+            # analyse user input 
+            analyser = Sentiment_Analyser()
+            analyser.dataframe = input_dataframe
+            self.dataframe = input_dataframe
+            self.sia_results = analyser.calc_nltk_sentiment()
+            self.roberta_results = analyser.calc_roberta_sentiment()
+            
+        
+            
+
         # allows pandas to use the full comment instead of shortening it
         pd.set_option('display.max_colwidth', None)
 

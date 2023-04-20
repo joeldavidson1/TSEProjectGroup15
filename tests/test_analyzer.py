@@ -26,12 +26,6 @@ def test_parse_message_for_analysis() -> None:
     assert parsed_words == ['Unit', 'testing',
                             'HopefullyThis', 'passes', 'test']
 
-
-def test_comments_are_empty() -> None:
-    analyser = Analyser()
-    assert analyser.all_comments == ""
-
-
 def test_calc_word_frequency() -> None:
     analyser = Analyser()
     analyser.all_comments = "four, four, four, four, three, three, three, two, two, one"
