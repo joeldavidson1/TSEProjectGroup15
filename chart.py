@@ -1,8 +1,11 @@
 import streamlit as st
+import pandas as pd
 import plotly.express as px
 from wordcloud import WordCloud
 
 # show average sentiment of dataset in a pie chart
+
+
 def pie_chart(dataset, title='Overall Sentiment:'):
     # mean each sentiment type
     mean_negative = dataset["negative"].mean()
@@ -17,6 +20,7 @@ def pie_chart(dataset, title='Overall Sentiment:'):
     st.caption(title)
     st.plotly_chart(fig)
 
+
 def select_post(analyzer):
     # get unique posts
     unique_post_ids = analyzer.dataframe["from_post_id"].unique()
@@ -27,14 +31,16 @@ def select_post(analyzer):
 # show the average sentiment of a specific post
 def display_post_sentiment(analyzer):
     # Get unique post_ids
-    selected_post_id = select_post(analyzer)  #need to change to post name on drop down
+    # need to change to post name on drop down
+    selected_post_id = select_post(analyzer)
 
     # Filter data and calculate sentiment
     filtered_data = analyzer.filter_by_post(selected_post_id).copy()
 
     # Display post
     st.caption('Post')
-    st.caption('post contents here..........') #add post content so there is context for sentiment
+    # add post content so there is context for sentiment
+    st.caption('post contents here..........')
 
     col1, col2 = st.columns(2)
 
@@ -47,6 +53,7 @@ def display_post_sentiment(analyzer):
     with col2:
         # Display pie chart
         pie_chart(filtered_data, title='Sentiment for Post Comments:')
+
 
 def word_cloud(dataset, title):
     # Generating word cloud

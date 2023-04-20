@@ -1,47 +1,34 @@
 import pandas as pd
 import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
+from transformers import AutoTokenizer
+from transformers import AutoModelForSequenceClassification
+from scipy.special import softmax
 
 import chart
+import csv_writer
 
-nltk.download('popular')
-nltk.download('vader_lexicon')
+# nltk.download('popular')
+# nltk.download('vader_lexicon')
 
 
-class Analyzer:
+class Analyser:
 
-    def __init__(self, path=None):
-        if path:
-            self.dataframe = pd.read_csv(path, nrows=50, encoding='utf8')
+    def __init__(self):
+            # load in precomputed sentiments
+            self.sia_results = pd.read_csv('dataset/nltk_analysis_results.csv', encoding='utf8')
+            self.roberta_results = pd.read_csv('dataset/roberta_analysis_results.csv', encoding='utf8')
+            # read in the same data from the dataset
+            rows = len(self.sia_results)
+            self.dataframe = pd.read_csv('dataset/fb_news_comments_20K_hashed.csv', nrows = rows,encoding='utf8')
             # allows pandas to use the full comment instead of shortening it
             pd.set_option('display.max_colwidth', None)
-        else:
-            self.dataframe = pd.DataFrame()
 
-        self.analysis_results = []
-        self.all_comments = ""
-        self.word_frequency = []
-        self.sia_results = pd.DataFrame()
-        self.frequency_results = pd.DataFrame()
+            # use precomputed info
+            self.all_comments = self.get_all_comments()
+            self.word_frequency = []        
 
-    # calc sentiment for each comment and store as a dataframe
-    def calc_sentiment(self):
-        sia = SentimentIntensityAnalyzer()
 
-        for index, row in (self.dataframe.iterrows()):
-            # append the sentiment analysis results to a dictionary
-            # retain key info such as comment and post id
-            sentiment_dict = {
-                'from_post_id': row['from_post_id'],
-                'negative': sia.polarity_scores(row['message'])['neg'],
-                'neutral': sia.polarity_scores(row['message'])['neu'],
-                'positive': sia.polarity_scores(row['message'])['pos'],
-                'compound': sia.polarity_scores(row['message'])['compound'],
-                'comment': row['message']
-            }
-            self.analysis_results.append(sentiment_dict)
-            self.sia_results = pd.DataFrame(self.analysis_results)
-  
     def calc_word_frequency(self):
         all_words = parse_messages_for_analysis(self.all_comments)
 
@@ -67,9 +54,9 @@ class Analyzer:
         filtered_data = self.sia_results[self.sia_results['from_post_id'] == post_id]
         return filtered_data
 
+    # convert all the comments from the csv into one string
     def get_all_comments(self):
-        # convert all the comments from the csv into one string
-        self.all_comments = self.dataframe['message'].sum()
+        return self.dataframe['message'].sum()
 
     # colour cell based on value relative to boundaries
     def colour_sentiment(self, val):
@@ -82,7 +69,6 @@ class Analyzer:
         else:
             colour = 'green'
         return f'background-color: {colour}'
-
 
 
 def tokenize_words(comments: str):

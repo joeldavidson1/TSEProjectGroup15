@@ -1,6 +1,6 @@
 import streamlit as st
 from wordcloud import WordCloud
-from analyzer import Analyzer
+from analyser import Analyser
 import chart
 
 
@@ -38,9 +38,8 @@ def dataset_analysis_UI():
 def analyser():
     # -----------Analysis-----------------
     # analyzing the input csv file
-    na = Analyzer('dataset/fb_news_comments_20K_hashed.csv')
+    na = Analyser()
     na.get_all_comments()
-    na.calc_sentiment()
     na.create_word_frequency_dataframe()
 
     return na
