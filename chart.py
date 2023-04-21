@@ -23,13 +23,13 @@ def pie_chart(dataset, title='Overall Sentiment:'):
 
 def select_post(analyser):
     # get unique posts
-    unique_post_ids = analyser.dataframe["from_post_id"].unique()
+    unique_post_ids = analyser.sia_results["from_post_id"].unique()
     # create select box with all unique values
-    return st.selectbox("Select a post:", unique_post_ids)
+    return st.selectbox("Select a post by post ID:", unique_post_ids)
 
 
-# show the average sentiment of a specific post
 def display_post_sentiment(analyser, nltk_analyser: bool):
+    # show the average sentiment of a specific post
     # Get unique post_ids
     # need to change to post name on drop down
     selected_post_id = select_post(analyser)
@@ -39,15 +39,17 @@ def display_post_sentiment(analyser, nltk_analyser: bool):
         selected_post_id, nltk_analyser).copy()
 
     # Display post
-    #st.caption('Post')
-    # add post content so there is context for sentiment
-    #st.caption('post contents here..........')
+    st.write("### Post message: ")
+    the_post = analyser.posts_dataframe[analyser.posts_dataframe['post_id'].str.contains(
+        str(selected_post_id))]
+    st.write(the_post['message'].to_string(index=False))
+    st.write(the_post['link'].to_string(index=False))
 
     col1, col2 = st.columns(2)
 
     # Display comments
     with col1:
-        st.caption('Post Comments:')
+        st.caption('Post comments:')
         comments = filtered_data['comment']
         st.dataframe(comments)
 

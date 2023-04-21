@@ -1,14 +1,15 @@
 import streamlit as st
+import about
 import analyse_text
 import dataset_analysis
 from precompute import Precompute
 
 
-@st.cache_data
+@st.cache
 # allows heavy computation to run only once
 def pre_compute_analysis():
     p = Precompute()
-    p.precompute_analysis('dataset/fb_news_comments_20K_hashed.csv', 5)
+    p.precompute_analysis('dataset/fb_news_comments_20K_hashed.csv', 6)
 
 
 if __name__ == '__main__':
@@ -22,10 +23,12 @@ if __name__ == '__main__':
 
     st.sidebar.title("Facebook Sentimental Analysis")
 
-    PAGES = ["Dataset Analysis", "Analyse Text"]
+    PAGES = ["About", "Dataset Analysis", "Analyse Text"]
     page = st.sidebar.radio("Navigation", PAGES)
 
-    if page == "Dataset Analysis":
+    if page == "About":
+        about.about_UI()
+    elif page == "Dataset Analysis":
         dataset_analysis.dataset_analysis_UI()
     elif page == "Analyse Text":
         analyse_text.analyse_text_UI()

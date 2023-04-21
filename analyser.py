@@ -15,7 +15,9 @@ from sentiment_analyser import Sentiment_Analyser
 
 class Analyser:
 
-    def __init__(self, input_dataframe = None):
+    def __init__(self, input_dataframe=None):
+        self.analyser = Sentiment_Analyser()
+
         if input_dataframe is None:
             # load in precomputed sentiments
             self.sia_results = pd.read_csv(
@@ -26,16 +28,15 @@ class Analyser:
             rows = len(self.sia_results)
             self.dataframe = pd.read_csv(
                 'dataset/fb_news_comments_20K_hashed.csv', nrows=rows, encoding='utf8')
+            self.posts_dataframe = pd.read_csv(
+                'dataset/fb_news_posts_20K.csv', nrows=rows, encoding='utf8')
         else:
-            # analyse user input 
-            analyser = Sentiment_Analyser()
-            analyser.dataframe = input_dataframe
+            # analyse user input
             self.dataframe = input_dataframe
-            self.sia_results = analyser.calc_nltk_sentiment()
-            self.roberta_results = analyser.calc_roberta_sentiment()
-            
-        
-            
+            # self.sia_text_results = self.analyser.calc_nltk_sentiment_text(
+            # input_dataframe)
+            # self.roberta_text_results = self.analyser.calc_nltk_roberta_text(
+            # input_dataframe)
 
         # allows pandas to use the full comment instead of shortening it
         pd.set_option('display.max_colwidth', None)
@@ -43,6 +44,16 @@ class Analyser:
         # use precomputed info
         self.all_comments = self.get_all_comments()
         self.word_frequency = []
+
+    def analyse_comment(self, nltk_analysis: bool, comment: str):
+        analysed_comment = pd.DataFrame()
+
+        if nltk_analysis:
+            analysed_comment = self.analyser.calc_nltk_sentiment_text(comment)
+        else:
+            analysed_comment = self.analyser.calc_nltk_roberta_text(comment)
+
+        return analysed_comment
 
     def calc_word_frequency(self):
         all_words = parse_messages_for_analysis(self.all_comments)
@@ -62,7 +73,7 @@ class Analyser:
                 'frequency': i[1]
             }
             self.word_frequency.append(dict_freq)
-        self.frequency_results = pd.DataFrame(self.word_frequency)
+        return pd.DataFrame(self.word_frequency)
 
     # return comments matching post_id
     def filter_by_post(self, post_id, nltk_option: bool):
@@ -75,9 +86,11 @@ class Analyser:
 
     # convert all the comments from the csv into one string
     def get_all_comments(self):
-        return self.dataframe['message'].sum()
+        if isinstance(self.dataframe, pd.DataFrame):
+            return self.dataframe['message'].sum()
 
     # colour cell based on value relative to boundaries
+
     def colour_sentiment(self, val):
         boundary1 = -0.2
         boundary2 = 0.2

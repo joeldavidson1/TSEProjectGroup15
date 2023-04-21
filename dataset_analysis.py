@@ -5,7 +5,7 @@ import chart
 
 
 def dataset_analysis_UI():
-    na = analyser()
+    na = Analyser()
     st.title('Facebook Sentiment Analysis')
     st.write("""
             ### Select an NLP model
@@ -22,19 +22,9 @@ def dataset_analysis_UI():
     # overall sentiment
 
     if model == "Natural Language Toolkit (NLTK)":
-        st.write("""
-                ### Natural Language Toolkit (NLTK)
-                NLTK is a leading platform for building Python programs to work with human language data. It provides easy-to-use interfaces to over 50 corpora and lexical resources such as WordNet, along with a suite of text processing libraries for classification, tokenization, stemming, tagging, parsing, and semantic reasoning, wrappers for industrial-strength NLP libraries, and an active discussion forum.
-                """)
+        st.write("## Natural Language Toolkit (NLTK)")
     else:
-        st.write("""
-                ### Hugging Face RoBERTa
-                The RoBERTa model was proposed in RoBERTa: A Robustly Optimized BERT Pretraining Approach by Yinhan Liu, Myle Ott, Naman Goyal, Jingfei Du, Mandar Joshi, Danqi Chen, Omer Levy, Mike Lewis, Luke Zettlemoyer, Veselin Stoyanov. It is based on Google’s BERT model released in 2018.
-
-                It builds on BERT and modifies key hyperparameters, removing the next-sentence pretraining objective and training with much larger mini-batches and learning rates.
-
-                This particular RoBERTa-base model has been trained on ~58M tweets and finetuned for sentiment analysis with the TweetEval benchmark. This model is suitable for English.
-                """)
+        st.write("## Hugging Face RoBERTa")
 
     st.subheader('Overall')
     col1, col2 = st.columns(2)
@@ -59,27 +49,67 @@ def dataset_analysis_UI():
         else:
             chart.pie_chart(na.roberta_results)
 
-    st.subheader('Sentiment by Post')
-    if model == "Natural Language Toolkit (NLTK)":
-        chart.display_post_sentiment(na, True)
-    else:
-        chart.display_post_sentiment(na, False)
-
-    st.subheader('Word Frequencies')
+    st.subheader('Word frequencies of the whole comment dataset')
     col1, col2 = st.columns(2)
     with col1:
         st.caption('These are the top most 50 common words:')
-        st.dataframe(na.frequency_results)
+        st.dataframe(na.create_word_frequency_dataframe())
     with col2:
-        chart.word_cloud(na.frequency_results,
+        chart.word_cloud(na.create_word_frequency_dataframe(),
                          'Word Cloud of the most common words:')
 
+    st.subheader('Sentiment by post')
+    if model == "Natural Language Toolkit (NLTK)":
+        post_analysis_UI(na, True, "Natural Language Toolkit (NLTK)")
+    else:
+        post_analysis_UI(na, False, "other")
 
-def analyser():
-    # -----------Analysis-----------------
-    # analysing the input csv file
-    na = Analyser()
-    na.get_all_comments()
-    na.create_word_frequency_dataframe()
 
-    return na
+def post_analysis_UI(analyser: Analyser, nltk_analyser: bool, model: str):
+    #  Get unique post_ids
+    # need to change to post name on drop down
+    selected_post_id = select_post(analyser)
+
+    # Filter data and calculate sentiment
+    filtered_data = analyser.filter_by_post(
+        selected_post_id, nltk_analyser).copy()
+
+    # Display post
+    st.write("#### Post message: ")
+    the_post = analyser.posts_dataframe[analyser.posts_dataframe['post_id'].str.contains(
+        str(selected_post_id))]
+    st.write(the_post['message'].to_string(index=False))
+    st.write(the_post['link'].to_string(index=False))
+
+    col1, col2 = st.columns(2)
+
+    # Display comments
+    with col1:
+        st.caption('Post comments:')
+        comments = filtered_data['comment']
+        st.dataframe(comments)
+
+    with col2:
+        # Display pie chart
+        chart.pie_chart(
+            filtered_data, title='Mean Sentiment for Post Comments:')
+
+    st.subheader("Sentiment by comment")
+    comment = st.selectbox("Select a comment from the post", comments)
+    analyser.dataframe = comment
+    st.write("#### Comment:")
+    st.write(comment)
+
+    if model == "Natural Language Toolkit (NLTK)":
+        nltk_result = analyser.analyse_comment(True, comment)
+        chart.pie_chart(nltk_result)
+    else:
+        roberta_result = analyser.analyse_comment(False, comment)
+        chart.pie_chart(roberta_result)
+
+
+def select_post(analyser: Analyser):
+    # get unique posts
+    unique_post_ids = analyser.sia_results["from_post_id"].unique()
+    # create select box with all unique values
+    return st.selectbox("Select a post by post ID:", unique_post_ids)
