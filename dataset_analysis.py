@@ -49,6 +49,10 @@ def dataset_analysis_UI():
         else:
             chart.pie_chart(na.roberta_results)
 
+    st.subheader(
+        "Bar chart showing the number of reviews of each sentiment (only works for NLTK, needs RoBERTa adding)")
+    chart.bar_chart(na.count_reviews(na.sia_results))
+
     st.subheader('Word frequencies of the whole comment dataset')
     col1, col2 = st.columns(2)
     with col1:

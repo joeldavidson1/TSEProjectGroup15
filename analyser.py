@@ -102,6 +102,18 @@ class Analyser:
             colour = 'green'
         return f'background-color: {colour}'
 
+    def count_reviews(self, dataset: pd.DataFrame):
+        # makes a separate dataframe for the number of sentiments out of all the comments
+        negative = dataset.loc[dataset['compound'] < -0.2]
+        positive = dataset.loc[dataset['compound'] > 0.2]
+        neutral = dataset.loc[(dataset['compound'] < 0.2)
+                              & (dataset['compound'] > -0.2)]
+
+        new_dataframe = pd.DataFrame(columns=["negative", "neutral", "positive", "total"], data=[
+                                     [negative.shape[0], neutral.shape[0], positive.shape[0], dataset.shape[0]]])
+
+        return new_dataframe
+
 
 def tokenize_words(comments: str):
    # tokenize the whole string
