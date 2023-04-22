@@ -81,8 +81,8 @@ class Sentiment_Analyser:
         polarity_scores = self.sia.polarity_scores(text_sample)
         sia_sentiment_dict = {
             'negative': polarity_scores['neg'],
-            'neutral': polarity_scores['neu'],
             'positive': polarity_scores['pos'],
+            'neutral': polarity_scores['neu'],
             'compound': polarity_scores['compound'],
             'message': text_sample
         }
