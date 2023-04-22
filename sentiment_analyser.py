@@ -95,8 +95,8 @@ class Sentiment_Analyser:
         sentiment_scores = self.roberta_sentiment(text_sample)
         roberta_sentiment_dict = {
             'negative': sentiment_scores[0],
-            'neutral': sentiment_scores[1],
             'positive': sentiment_scores[2],
+            'neutral': sentiment_scores[1],
             'message': text_sample
         }
 
