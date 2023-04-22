@@ -45,9 +45,9 @@ def dataset_analysis_UI():
 
     with col2:
         if model == "Natural Language Toolkit (NLTK)":
-            chart.pie_chart(na.sia_results, True)
+            chart.pie_chart(na.sia_results)
         else:
-            chart.pie_chart(na.roberta_results, False)
+            chart.pie_chart(na.roberta_results)
 
     st.subheader(
         "Bar chart showing the number of reviews of each sentiment (only works for NLTK, needs RoBERTa adding)")
@@ -95,12 +95,8 @@ def post_analysis_UI(analyser: Analyser, nltk_analyser: bool, model: str):
 
     with col2:
         # Display pie chart
-        if model == "Natural Language Toolkit (NLTK)":
-            chart.pie_chart(
-                filtered_data, True, title='Mean Sentiment for Post Comments:')
-        else:
-            chart.pie_chart(
-                filtered_data, False, title='Mean Sentiment for Post Comments:')
+        chart.pie_chart(
+            filtered_data, title='Mean Sentiment for Post Comments:')
 
     st.subheader("Sentiment by comment")
     comment = st.selectbox("Select a comment from the post", comments)
@@ -110,10 +106,10 @@ def post_analysis_UI(analyser: Analyser, nltk_analyser: bool, model: str):
 
     if model == "Natural Language Toolkit (NLTK)":
         nltk_result = analyser.analyse_comment(True, comment)
-        chart.pie_chart(nltk_result, True)
+        chart.pie_chart(nltk_result)
     else:
         roberta_result = analyser.analyse_comment(False, comment)
-        chart.pie_chart(roberta_result, False)
+        chart.pie_chart(roberta_result)
 
 
 def select_post(analyser: Analyser):
