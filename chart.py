@@ -16,7 +16,7 @@ def pie_chart(dataset, title='Overall Sentiment:'):
     means = [mean_negative, mean_positive, mean_neutral]
     names = ['negative', 'positive', 'neutral']
     fig = px.pie(values=means, names=names,
-                 color_discrete_sequence=["yellow", "green", "red"], hole=0.35)
+                 color_discrete_sequence=["#FFD700", "green", "red"], hole=0.35)
     st.caption(title)
     st.plotly_chart(fig)
 
@@ -38,7 +38,7 @@ def bar_chart(dataset):
         x=["negative", "neutral", "positive"],
         y="value",
         orientation="v",
-        color_discrete_sequence=["yellow", "red", "green"]
+        color_discrete_sequence=["#FFD700", "red", "green"]
     ).update_layout(xaxis_title="Sentiment", yaxis_title="Number of comments")
     bar_chart.update_xaxes(tickvals=(1, 2, 3), ticktext=[
                            "negative", "neutral", "positive"])
