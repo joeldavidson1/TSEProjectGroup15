@@ -1,35 +1,44 @@
 import streamlit as st
-from analyzer import Analyzer
-from wordcloud import WordCloud
-import chart
+import about
+import analyse_text
+import dataset_analysis
+from precompute import Precompute
 
-# -----------Analysis-----------------
-# analyzing the input csv file
-na = Analyzer('dataset/fb_news_comments_20K_hashed.csv')
-na.get_all_comments()
-na.calc_sentiment()
-na.create_word_frequency_dataframe()
+number_of_comments = 6 # number of comments to analyze
 
-# -----------Webpage setout-----------
-st.set_page_config(page_title='Facebook Sentimental Analysis',
-                   layout='wide'
-                   )
+@st.cache_data #@st.cache # - for joel
+# allows heavy computation to run only once
+def pre_compute_analysis():
+    p = Precompute()
+    p.precompute_analysis('dataset/fb_news_comments_20K_hashed.csv', number_of_comments)
 
-st.title('Facebook Sentiment Analysis')
 
-# display the results on the webpage
+if __name__ == '__main__':
+    # -----------Webpage setout-----------
+    st.set_page_config(page_title='Facebook Sentimental Analysis',
+                       layout='wide',
+                       initial_sidebar_state="expanded"
+                       )
 
-st.caption('This is the NLTK results of the Facebook comments')
-st.dataframe(na.sia_results)
+    pre_compute_analysis()
 
-st.caption('These are the top most 50 common words')
-st.dataframe(na.frequency_results)
+    st.sidebar.title("Facebook Sentimental Analysis")
 
-st.caption('Word Cloud showing highest frequency words in the whole dataset')
-chart.word_cloud(na.frequency_results)
+    PAGES = ["About", "Dataset Analysis", "Analyse Text"]
+    page = st.sidebar.radio("Navigation", PAGES)
 
-st.caption('The overall sentiment of the dataset')
-chart.pie_chart(na.sia_results)
+    if page == "About":
+        about.about_UI()
+    elif page == "Dataset Analysis":
+        dataset_analysis.dataset_analysis_UI()
+    elif page == "Analyse Text":
+        analyse_text.analyse_text_UI()
 
-st.caption('The sentiment by post name')
-chart.display_filtered_pie_chart(na)
+    # Hiding the Streamlit style
+    hide_st_style = """
+                <style>
+                footer {visibility: hidden;}
+                header {visibility: hidden;}
+                </style>
+                """
+    st.markdown(hide_st_style, unsafe_allow_html=True)

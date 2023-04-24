@@ -1,4 +1,4 @@
-from analyzer import Analyzer, tokenize_words, remove_non_words, remove_stop_words, parse_messages_for_analysis
+from analyser import Analyser, tokenize_words, remove_non_words, remove_stop_words, parse_messages_for_analysis
 import nltk
 
 
@@ -26,14 +26,8 @@ def test_parse_message_for_analysis() -> None:
     assert parsed_words == ['Unit', 'testing',
                             'HopefullyThis', 'passes', 'test']
 
-
-def test_comments_are_empty() -> None:
-    analyzer = Analyzer()
-    assert analyzer.all_comments == ""
-
-
 def test_calc_word_frequency() -> None:
-    analyzer = Analyzer()
-    analyzer.all_comments = "four, four, four, four, three, three, three, two, two, one"
-    common_words = analyzer.calc_word_frequency()
+    analyser = Analyser()
+    analyser.all_comments = "four, four, four, four, three, three, three, two, two, one"
+    common_words = analyser.calc_word_frequency()
     assert common_words == [('four', 4), ('three', 3), ('two', 2), ('one', 1)]

@@ -1,41 +1,43 @@
 import streamlit as st
+import pandas as pd
 import plotly.express as px
 from wordcloud import WordCloud
 
-# show average sentiment of dataset in a pie chart
-def pie_chart(dataset, title='Overall Sentiment'):
-    # mean each sentiment type
-    mean_negative = dataset["negative"].mean()
-    mean_positive = dataset["positive"].mean()
-    mean_neutral = dataset["neutral"].mean()
 
-    # create a pie chart using the means
-    means = [mean_negative, mean_positive, mean_neutral]
+def pie_chart(dataset, title='Overall Sentiment Makeup:'):
+    # create a pie chart using the totals
+    counts = [dataset['negative'][0], dataset['positive'][0], dataset['neutral'][0]]
     names = ['negative', 'positive', 'neutral']
-    fig = px.pie(values=means, names=names)
-
+    colour_dict = {'negative': 'red',
+                   'positive': "green",
+                   'neutral': '#FFD700'}
+    fig = px.pie(values=counts, names=names,
+                 color=names, color_discrete_map=colour_dict, hole=0.35)
     st.caption(title)
     st.plotly_chart(fig)
 
-# show the average sentiment of a specific post
-def display_filtered_pie_chart(analyzer):
-    # Get unique post_ids
-    unique_post_ids = analyzer.dataframe["post_name"].unique()
-    selected_post_id = st.selectbox("Select a post:", unique_post_ids)
 
-    # Filter data and calculate sentiment
-    filtered_data = analyzer.filter_by_post(selected_post_id).copy() #need to change to post name on drop down
-    filtered_sia_results = analyzer.calc_sentiment_filtered(filtered_data)
-
-    # Display pie chart
-    pie_chart(filtered_sia_results, title=f'Sentiment for post {selected_post_id}')
-
-def word_cloud(dataset):
+def word_cloud(dataset, title):
     # Generating word cloud
     text = dataset['word'].values
     string_text = ' '.join(text)
 
     wc = WordCloud().generate(string_text)
 
-    st.caption('Most common words')
-    st.image(wc.to_array(), width=650)
+    st.caption(title)
+    st.image(wc.to_array(), width=550)
+
+
+def bar_chart(dataset, title = 'Sentiment Count:'):
+    st.caption(title)
+    bar_chart = px.bar(
+        data_frame=dataset,
+        x=["negative", "neutral", "positive"],
+        y="value",
+        orientation="v",
+        color_discrete_sequence=["red", "#FFD700", "green"]
+    ).update_layout(xaxis_title="Sentiment Count:", yaxis_title="Number of comments")
+    bar_chart.update_xaxes(tickvals=(1, 2, 3), ticktext=[
+                           "negative", "neutral", "positive"])
+
+    st.plotly_chart(bar_chart)
