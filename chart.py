@@ -7,18 +7,13 @@ from wordcloud import WordCloud
 
 
 def pie_chart(dataset, title='Overall Sentiment:'):
-    # mean each sentiment type
-    mean_negative = dataset["negative"].mean()
-    mean_positive = dataset["positive"].mean()
-    mean_neutral = dataset["neutral"].mean()
-
-    # create a pie chart using the means
-    means = [mean_negative, mean_positive, mean_neutral]
+    # create a pie chart using the totals
+    counts = [dataset['negative'][0], dataset['positive'][0], dataset['neutral'][0]]
     names = ['negative', 'positive', 'neutral']
     colour_dict = {'negative': 'red',
                    'positive': "green",
                    'neutral': '#FFD700'}
-    fig = px.pie(values=means, names=names,
+    fig = px.pie(values=counts, names=names,
                  color=names, color_discrete_map=colour_dict, hole=0.35)
     st.caption(title)
     st.plotly_chart(fig)

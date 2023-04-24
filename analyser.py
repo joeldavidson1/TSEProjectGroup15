@@ -45,6 +45,9 @@ class Analyser:
         self.all_comments = self.get_all_comments()
         self.word_frequency = []
 
+        # boundary for sentiment compound splitting 
+        self.boundary = 0.2
+
     def analyse_comment(self, nltk_analysis: bool, comment: str):
         analysed_comment = pd.DataFrame()
 
@@ -90,28 +93,25 @@ class Analyser:
             return self.dataframe['message'].sum()
 
     # colour cell based on value relative to boundaries
-
     def colour_sentiment(self, val):
-        boundary1 = -0.2
-        boundary2 = 0.2
-        if val < boundary1:
+        if val < -self.boundary:
             colour = 'red'
-        elif val < boundary2:
+        elif val < self.boundary:
             colour = 'orange'
         else:
             colour = 'green'
         return f'background-color: {colour}'
 
-    def count_reviews(self, dataset: pd.DataFrame):
+    def count_sentiments(self, dataset: pd.DataFrame):
+        boundary = 0.2
         # makes a separate dataframe for the number of sentiments out of all the comments
-        negative = dataset.loc[dataset['compound'] < -0.2]
-        positive = dataset.loc[dataset['compound'] > 0.2]
-        neutral = dataset.loc[(dataset['compound'] < 0.2)
-                              & (dataset['compound'] > -0.2)]
+        negative = dataset.loc[dataset['compound'] < -self.boundary]
+        positive = dataset.loc[dataset['compound'] > self.boundary]
+        neutral = dataset.loc[(dataset['compound'] < self.boundary)
+                              & (dataset['compound'] > -self.boundary)]
 
         new_dataframe = pd.DataFrame(columns=["negative", "neutral", "positive", "total"], data=[
                                      [negative.shape[0], neutral.shape[0], positive.shape[0], dataset.shape[0]]])
-
         return new_dataframe
 
 
