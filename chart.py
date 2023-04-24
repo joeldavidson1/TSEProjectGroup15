@@ -3,8 +3,6 @@ import pandas as pd
 import plotly.express as px
 from wordcloud import WordCloud
 
-# show average sentiment of dataset in a pie chart
-
 
 def pie_chart(dataset, title='Overall Sentiment:'):
     # create a pie chart using the totals

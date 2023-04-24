@@ -46,7 +46,7 @@ class Analyser:
         self.word_frequency = []
 
         # boundary for sentiment compound splitting 
-        self.boundary = 0.2
+        self.boundary = 0.1
 
     def analyse_comment(self, nltk_analysis: bool, comment: str):
         analysed_comment = pd.DataFrame()
