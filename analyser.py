@@ -46,7 +46,7 @@ class Analyser:
         self.word_frequency = []
 
         # boundary for sentiment compound splitting 
-        self.boundary = 0.2
+        self.boundary = 0.1
 
     def analyse_comment(self, nltk_analysis: bool, comment: str):
         analysed_comment = pd.DataFrame()
@@ -89,8 +89,14 @@ class Analyser:
 
     # convert all the comments from the csv into one string
     def get_all_comments(self):
+        # check dataframe is not empty
         if isinstance(self.dataframe, pd.DataFrame):
-            return self.dataframe['message'].sum()
+            # get comments from column. Column name may vary between comment and message 
+            if 'comment' in self.dataframe.columns:
+                return self.dataframe['comment'].sum()
+            elif 'message' in self.dataframe.columns:
+                return self.dataframe['message'].sum()
+        return pd.DataFrame()
 
     # colour cell based on value relative to boundaries
     def colour_sentiment(self, val):

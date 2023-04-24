@@ -4,12 +4,13 @@ import analyse_text
 import dataset_analysis
 from precompute import Precompute
 
+number_of_comments = 6 # number of comments to analyze
 
-@st.cache
+@st.cache_data #@st.cache # - for joel
 # allows heavy computation to run only once
 def pre_compute_analysis():
     p = Precompute()
-    p.precompute_analysis('dataset/fb_news_comments_20K_hashed.csv', 6)
+    p.precompute_analysis('dataset/fb_news_comments_20K_hashed.csv', number_of_comments)
 
 
 if __name__ == '__main__':

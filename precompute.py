@@ -11,8 +11,10 @@ class Precompute:
         # only compute if an existing csv file isn't found or has a different number of rows
         if (csv_handler.get_length_of_csv('dataset/nltk_analysis_results.csv') == number_of_rows and
                 csv_handler.get_length_of_csv('dataset/nltk_analysis_results.csv') == number_of_rows):
+            print('precompute already done.')
             return
         else:
+            print('calculating values.')
             # size of csv's are different so compute new
             analyser = Sentiment_Analyser(path, number_of_rows)
             # Get analysis results

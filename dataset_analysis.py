@@ -26,37 +26,35 @@ def dataset_analysis_UI():
     else:
         st.write("## Hugging Face RoBERTa")
 
-    st.subheader('Overall')
+    st.subheader('Overall Sentiment Data')
+    st.caption('The dataset:')
+    if model == "Natural Language Toolkit (NLTK)":
+        st.dataframe(na.sia_results.style.applymap(
+            na.colour_sentiment, subset=['compound']))
+
+        with open('dataset/nltk_analysis_results.csv', 'rb') as f:
+            st.download_button('Download raw data', f,
+                                file_name='nltk_analysis_results.csv')
+    else:
+        st.dataframe(na.roberta_results)
+        with open('dataset/roberta_analysis_results.csv', 'rb') as f:
+            st.download_button('Download raw data', f,
+                                file_name='roberta_analysis_results.csv')
+    st.subheader(
+            "Overall Sentiment Makeup")
     col1, col2 = st.columns(2)
     with col1:
-        st.caption('The dataset:')
-        if model == "Natural Language Toolkit (NLTK)":
-            st.dataframe(na.sia_results.style.applymap(
-                na.colour_sentiment, subset=['compound']))
-
-            with open('dataset/nltk_analysis_results.csv', 'rb') as f:
-                st.download_button('Download raw data', f,
-                                   file_name='nltk_analysis_results.csv')
-        else:
-            st.dataframe(na.roberta_results)
-            with open('dataset/roberta_analysis_results.csv', 'rb') as f:
-                st.download_button('Download raw data', f,
-                                   file_name='roberta_analysis_results.csv')
-
-    with col2:
         if model == "Natural Language Toolkit (NLTK)":
             counts = na.count_sentiments(na.sia_results)
         else:
             counts = na.count_sentiments(na.roberta_results)
         chart.pie_chart(counts)
-
-    st.subheader(
-        "Bar chart showing the number of reviews of each sentiment (only works for NLTK, needs RoBERTa adding)")
-    if model == "Natural Language Toolkit (NLTK)":
-            results = na.count_sentiments(na.sia_results)
-    else:
-        results = na.count_sentiments(na.roberta_results)
-    chart.bar_chart(results)
+    with col2:
+        if model == "Natural Language Toolkit (NLTK)":
+                results = na.count_sentiments(na.sia_results)
+        else:
+            results = na.count_sentiments(na.roberta_results)
+        chart.bar_chart(results)
 
     st.subheader('Word frequencies of the whole comment dataset')
     col1, col2 = st.columns(2)
@@ -104,23 +102,34 @@ def post_analysis_UI(analyser: Analyser, nltk_analyser: bool, model: str):
         # Display pie chart
         counts = analyser.count_sentiments(filtered_data)
         chart.pie_chart(
-            counts, title='Mean Sentiment for Post Comments:')
+            counts, title='Sentiment Count for Post Comments:')
 
+    # Select comment and analyse
     comments = filtered_data['comment']
     st.subheader("Sentiment by comment")
     comment = st.selectbox("Select a comment from the post", comments)
     analyser.dataframe = comment
-    st.write("#### Comment:")
-    st.write(comment)
-
-    if model == "Natural Language Toolkit (NLTK)":
+    # Show comments sentiment as table and pie chart
+    if model == "Natural Language Toolkit (NLTK)":        
         nltk_result = analyser.analyse_comment(True, comment)
-        counts = na.count_sentiments(nltk_result)
-        chart.pie_chart(counts)
+        col1, col2 = st.columns(2)
+        with col1: 
+            st.caption('Comment')     
+            st.dataframe(nltk_result.style.applymap(
+                na.colour_sentiment, subset=['compound']))
+        with col2:
+            chart.pie_chart(nltk_result, 'Sentiment Makeup:')
     else:
-        roberta_result = analyser.analyse_comment(False, comment) # BROKE
-        counts = na.count_sentiments(roberta_result)
-        chart.pie_chart(counts)
+        roberta_result = analyser.analyse_comment(False, comment) 
+        col1, col2 = st.columns(2)
+        with col1:  
+            st.caption('Comment')        
+            st.dataframe(roberta_result.style.applymap(
+                na.colour_sentiment, subset=['compound']))
+        with col2:
+            chart.pie_chart(roberta_result, 'Sentiment Makeup:')
+
+    
 
 
 def select_post(analyser: Analyser):

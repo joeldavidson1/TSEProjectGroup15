@@ -15,13 +15,11 @@ def analyse_text_UI():
     user_text_input = st.text_input(label='Text Input', value='Replace me :)')
     if user_text_input:
         # create dataset in correct format
-        # user_dict = {
-        #     'from_post_id': [0],
-        #     'message': [user_text_input]
-        # }
-        # dataset = pd.DataFrame(user_dict)
-
-        na = Analyser(user_text_input)
+        user_dict = {
+            'message': [user_text_input]
+        }
+        dataset = pd.DataFrame(user_dict)
+        na = Analyser(dataset)
 
         st.title('Facebook Sentiment Analysis')
         st.write("""
@@ -66,16 +64,21 @@ def analyse_text_UI():
 
         with col2:
             if model == "Natural Language Toolkit (NLTK)":
-                counts = na.count_sentiments(nltk_analysis)
+                data = nltk_analysis
             else:
-                counts = na.count_sentiments(roberta_analysis)
-            chart.pie_chart(counts)
+                data = roberta_analysis
+            chart.pie_chart(data)
 
-        # st.subheader('Word Frequencies')
-        # col1, col2 = st.columns(2)
-        # with col1:
-        #     st.caption('These are the most common words:')
-        #     st.dataframe(na.create_word_frequency_dataframe())
-        # with col2:
-        #     chart.word_cloud(na.create_word_frequency_dataframe(),
-        #                      'Word Cloud of the most common words:')
+        st.subheader('Word Frequencies')
+        col1, col2 = st.columns(2)
+        with col1:
+            st.caption('These are the most common words:')
+            st.dataframe(na.create_word_frequency_dataframe())
+        with col2:
+            chart.word_cloud(na.create_word_frequency_dataframe(),
+                             'Word Cloud of the most common words:')
+            
+
+
+
+
