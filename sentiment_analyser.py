@@ -38,6 +38,7 @@ class Sentiment_Analyser:
                 'positive': self.sia.polarity_scores(row['message'])['pos'],
                 'from_post_id': str(row['from_post_id']).split("_", 1)[1]
             }
+            print(f'NLTK Compute: {index + 1} / {self.dataframe.shape[0]}')
             # append the dictionaries to the list of dicts
             nltk_analysis_results.append(sia_sentiment_dict)
         return pd.DataFrame(nltk_analysis_results)
@@ -56,7 +57,7 @@ class Sentiment_Analyser:
                 'positive': sentiment_scores[2],                
                 'from_post_id': row['from_post_id'].split("_", 1)[1]
             }
-
+            print(f'Roberta Compute: {index + 1} / {self.dataframe.shape[0]}')
             # append the dictionaries to the list of dicts
             roberta_analysis_results.append(roberta_sentiment_dict)
         return pd.DataFrame(roberta_analysis_results)
