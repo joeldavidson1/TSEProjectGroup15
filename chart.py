@@ -35,7 +35,7 @@ def bar_chart(dataset, title = 'Sentiment Count:'):
         x=["negative", "neutral", "positive"],
         y="value",
         orientation="v",
-        color_discrete_sequence=["#FFD700", "red", "green"]
+        color_discrete_sequence=["red", "#FFD700", "green"]
     ).update_layout(xaxis_title="Sentiment Count:", yaxis_title="Number of comments")
     bar_chart.update_xaxes(tickvals=(1, 2, 3), ticktext=[
                            "negative", "neutral", "positive"])

@@ -42,9 +42,7 @@ class Analyser:
         pd.set_option('display.max_colwidth', None)
 
         # use precomputed info
-        print(self.dataframe)
         self.all_comments = self.get_all_comments()
-        print(self.all_comments)
         self.word_frequency = []
 
         # boundary for sentiment compound splitting 
