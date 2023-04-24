@@ -64,10 +64,10 @@ def analyse_text_UI():
 
         with col2:
             if model == "Natural Language Toolkit (NLTK)":
-                counts = na.count_sentiments(nltk_analysis)
+                data = nltk_analysis
             else:
-                counts = na.count_sentiments(roberta_analysis)
-            chart.pie_chart(counts)
+                data = roberta_analysis
+            chart.pie_chart(data)
 
         st.subheader('Word Frequencies')
         col1, col2 = st.columns(2)
@@ -77,3 +77,8 @@ def analyse_text_UI():
         with col2:
             chart.word_cloud(na.create_word_frequency_dataframe(),
                              'Word Cloud of the most common words:')
+            
+
+
+
+
