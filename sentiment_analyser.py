@@ -46,10 +46,12 @@ class Sentiment_Analyser:
             # append the sentiment analysis results to a dictionary
             # retain key info such as comment and post id
             sentiment_scores = self.roberta_sentiment(row['message'])
+            print(type(sentiment_scores))
             roberta_sentiment_dict = {
                 'negative': sentiment_scores[0],
                 'neutral': sentiment_scores[1],
                 'positive': sentiment_scores[2],
+                'compound': sentiment_scores.mean(),
                 'comment': row['message'],
                 'from_post_id': row['from_post_id'].split("_", 1)[1]
             }
@@ -97,6 +99,7 @@ class Sentiment_Analyser:
             'negative': sentiment_scores[0],
             'positive': sentiment_scores[2],
             'neutral': sentiment_scores[1],
+            'compound': sentiment_scores.mean(),
             'message': text_sample
         }
 

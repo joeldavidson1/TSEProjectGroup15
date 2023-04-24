@@ -66,9 +66,10 @@ def analyse_text_UI():
 
         with col2:
             if model == "Natural Language Toolkit (NLTK)":
-                chart.pie_chart(nltk_analysis)
+                counts = na.count_sentiments(nltk_analysis)
             else:
-                chart.pie_chart(roberta_analysis)
+                counts = na.count_sentiments(roberta_analysis)
+            chart.pie_chart(counts)
 
         # st.subheader('Word Frequencies')
         # col1, col2 = st.columns(2)

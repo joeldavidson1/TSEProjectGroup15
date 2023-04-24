@@ -45,13 +45,18 @@ def dataset_analysis_UI():
 
     with col2:
         if model == "Natural Language Toolkit (NLTK)":
-            chart.pie_chart(na.sia_results)
+            counts = na.count_sentiments(na.sia_results)
         else:
-            chart.pie_chart(na.roberta_results)
+            counts = na.count_sentiments(na.roberta_results)
+        chart.pie_chart(counts)
 
     st.subheader(
         "Bar chart showing the number of reviews of each sentiment (only works for NLTK, needs RoBERTa adding)")
-    chart.bar_chart(na.count_reviews(na.sia_results))
+    if model == "Natural Language Toolkit (NLTK)":
+            results = na.count_sentiments(na.sia_results)
+    else:
+        results = na.count_sentiments(na.roberta_results)
+    chart.bar_chart(results)
 
     st.subheader('Word frequencies of the whole comment dataset')
     col1, col2 = st.columns(2)
@@ -70,6 +75,7 @@ def dataset_analysis_UI():
 
 
 def post_analysis_UI(analyser: Analyser, nltk_analyser: bool, model: str):
+    na = Analyser()
     #  Get unique post_ids
     # need to change to post name on drop down
     selected_post_id = select_post(analyser)
@@ -90,14 +96,17 @@ def post_analysis_UI(analyser: Analyser, nltk_analyser: bool, model: str):
     # Display comments
     with col1:
         st.caption('Post comments:')
-        comments = filtered_data['comment']
-        st.dataframe(comments)
+        display_data = filtered_data[['comment','compound']]
+        st.dataframe(display_data.style.applymap(
+                na.colour_sentiment, subset=['compound']))
 
     with col2:
         # Display pie chart
+        counts = analyser.count_sentiments(filtered_data)
         chart.pie_chart(
-            filtered_data, title='Mean Sentiment for Post Comments:')
+            counts, title='Mean Sentiment for Post Comments:')
 
+    comments = filtered_data['comment']
     st.subheader("Sentiment by comment")
     comment = st.selectbox("Select a comment from the post", comments)
     analyser.dataframe = comment
@@ -106,10 +115,12 @@ def post_analysis_UI(analyser: Analyser, nltk_analyser: bool, model: str):
 
     if model == "Natural Language Toolkit (NLTK)":
         nltk_result = analyser.analyse_comment(True, comment)
-        chart.pie_chart(nltk_result)
+        counts = na.count_sentiments(nltk_result)
+        chart.pie_chart(counts)
     else:
-        roberta_result = analyser.analyse_comment(False, comment)
-        chart.pie_chart(roberta_result)
+        roberta_result = analyser.analyse_comment(False, comment) # BROKE
+        counts = na.count_sentiments(roberta_result)
+        chart.pie_chart(counts)
 
 
 def select_post(analyser: Analyser):
