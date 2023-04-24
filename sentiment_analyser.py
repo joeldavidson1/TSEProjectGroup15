@@ -30,12 +30,12 @@ class Sentiment_Analyser:
             # append the sentiment analysis results to a dictionary
             # retain key info such as comment and post id
             sia_sentiment_dict = {
+                'comment': row['message'],
+                'compound': calc_compound(self.sia.polarity_scores(row['message'])['neg'], 
+                                            self.sia.polarity_scores(row['message'])['pos']),
                 'negative': self.sia.polarity_scores(row['message'])['neg'],
                 'neutral': self.sia.polarity_scores(row['message'])['neu'],
                 'positive': self.sia.polarity_scores(row['message'])['pos'],
-                'compound': calc_compound(self.sia.polarity_scores(row['message'])['neg'], 
-                                            self.sia.polarity_scores(row['message'])['pos']),
-                'comment': row['message'],
                 'from_post_id': str(row['from_post_id']).split("_", 1)[1]
             }
             # append the dictionaries to the list of dicts
@@ -49,11 +49,11 @@ class Sentiment_Analyser:
             # retain key info such as comment and post id
             sentiment_scores = self.roberta_sentiment(row['message'])
             roberta_sentiment_dict = {
+                'comment': row['message'],
+                'compound': calc_compound(sentiment_scores[0], sentiment_scores[2]),
                 'negative': sentiment_scores[0],
                 'neutral': sentiment_scores[1],
-                'positive': sentiment_scores[2],
-                'compound': calc_compound(sentiment_scores[0], sentiment_scores[2]),
-                'comment': row['message'],
+                'positive': sentiment_scores[2],                
                 'from_post_id': row['from_post_id'].split("_", 1)[1]
             }
 
@@ -85,11 +85,11 @@ class Sentiment_Analyser:
         sia_results = []
         sentiment_scores = self.sia.polarity_scores(text_sample)
         sia_sentiment_dict = {
+            'comment': text_sample,
+            'compound': calc_compound(sentiment_scores['neg'], sentiment_scores['pos']),
             'negative': sentiment_scores['neg'],
             'positive': sentiment_scores['pos'],
-            'neutral': sentiment_scores['neu'],
-            'compound': calc_compound(sentiment_scores['neg'], sentiment_scores['pos']),
-            'message': text_sample
+            'neutral': sentiment_scores['neu']                      
         }
 
         sia_results.append(sia_sentiment_dict)
@@ -99,23 +99,15 @@ class Sentiment_Analyser:
         roberta_results = []
         sentiment_scores = self.roberta_sentiment(text_sample)
         roberta_sentiment_dict = {
+            'comment': text_sample,
+            'compound': calc_compound(sentiment_scores[0], sentiment_scores[2]),
             'negative': sentiment_scores[0],
             'positive': sentiment_scores[2],
-            'neutral': sentiment_scores[1],
-            'compound': calc_compound(sentiment_scores[0], sentiment_scores[2]),
-            'message': text_sample
+            'neutral': sentiment_scores[1]                       
         }
 
         roberta_results.append(roberta_sentiment_dict)
         return pd.DataFrame(roberta_results)
-    
-def calc_mean(array):
-    total = 0
-    count = 0
-    for i in array:
-        total += i
-        count += 1
-    return total / count
 
 # finds the bias between positive and negative sentiment
 # 1 - 0 = 1 so positive sentiment 

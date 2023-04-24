@@ -42,7 +42,9 @@ class Analyser:
         pd.set_option('display.max_colwidth', None)
 
         # use precomputed info
+        print(self.dataframe)
         self.all_comments = self.get_all_comments()
+        print(self.all_comments)
         self.word_frequency = []
 
         # boundary for sentiment compound splitting 
@@ -89,8 +91,14 @@ class Analyser:
 
     # convert all the comments from the csv into one string
     def get_all_comments(self):
+        # check dataframe is not empty
         if isinstance(self.dataframe, pd.DataFrame):
-            return self.dataframe['message'].sum()
+            # get comments from column. Column name may vary between comment and message 
+            if 'comment' in self.dataframe.columns:
+                return self.dataframe['comment'].sum()
+            elif 'message' in self.dataframe.columns:
+                return self.dataframe['message'].sum()
+        return pd.DataFrame()
 
     # colour cell based on value relative to boundaries
     def colour_sentiment(self, val):

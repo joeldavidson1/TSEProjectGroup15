@@ -4,7 +4,7 @@ import plotly.express as px
 from wordcloud import WordCloud
 
 
-def pie_chart(dataset, title='Overall Sentiment:'):
+def pie_chart(dataset, title='Overall Sentiment Makeup:'):
     # create a pie chart using the totals
     counts = [dataset['negative'][0], dataset['positive'][0], dataset['neutral'][0]]
     names = ['negative', 'positive', 'neutral']
@@ -28,14 +28,15 @@ def word_cloud(dataset, title):
     st.image(wc.to_array(), width=550)
 
 
-def bar_chart(dataset):
+def bar_chart(dataset, title = 'Sentiment Count:'):
+    st.caption(title)
     bar_chart = px.bar(
         data_frame=dataset,
         x=["negative", "neutral", "positive"],
         y="value",
         orientation="v",
         color_discrete_sequence=["#FFD700", "red", "green"]
-    ).update_layout(xaxis_title="Sentiment", yaxis_title="Number of comments")
+    ).update_layout(xaxis_title="Sentiment Count:", yaxis_title="Number of comments")
     bar_chart.update_xaxes(tickvals=(1, 2, 3), ticktext=[
                            "negative", "neutral", "positive"])
 
