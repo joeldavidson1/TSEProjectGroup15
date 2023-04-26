@@ -19,7 +19,7 @@ if __name__ == '__main__':
                        initial_sidebar_state="expanded"
                        )
 
-    # pre_compute_analysis()
+    pre_compute_analysis()
 
     st.sidebar.title("Facebook Sentimental Analysis")
 
