@@ -7,7 +7,8 @@ from precompute import Precompute
 number_of_comments = 6  # number of comments to analyze
 
 
-@st.cache_data  # @st.cache # - for joel
+# @st.cache_data  # @st.cache # - for joel
+@st.cache
 # allows heavy computation to run only once
 def pre_compute_analysis():
     p = Precompute()
