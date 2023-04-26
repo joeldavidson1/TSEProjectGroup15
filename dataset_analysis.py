@@ -34,15 +34,15 @@ def dataset_analysis_UI():
 
         with open('dataset/nltk_analysis_results.csv', 'rb') as f:
             st.download_button('Download raw data', f,
-                                file_name='nltk_analysis_results.csv')
+                               file_name='nltk_analysis_results.csv')
     else:
         st.dataframe(na.roberta_results.style.applymap(
             na.colour_sentiment, subset=['compound']))
         with open('dataset/roberta_analysis_results.csv', 'rb') as f:
             st.download_button('Download raw data', f,
-                                file_name='roberta_analysis_results.csv')
+                               file_name='roberta_analysis_results.csv')
     st.subheader(
-            "Overall Sentiment Makeup")
+        "Overall Sentiment Makeup")
     col1, col2 = st.columns(2)
     with col1:
         if model == "Natural Language Toolkit (NLTK)":
@@ -95,9 +95,9 @@ def post_analysis_UI(analyser: Analyser, nltk_analyser: bool, model: str):
     # Display comments
     with col1:
         st.caption('Post comments:')
-        display_data = filtered_data[['comment','compound']]
+        display_data = filtered_data[['comment', 'compound']]
         st.dataframe(display_data.style.applymap(
-                na.colour_sentiment, subset=['compound']))
+            na.colour_sentiment, subset=['compound']))
 
     with col2:
         # Display pie chart
@@ -111,26 +111,24 @@ def post_analysis_UI(analyser: Analyser, nltk_analyser: bool, model: str):
     comment = st.selectbox("Select a comment from the post", comments)
     analyser.dataframe = comment
     # Show comments sentiment as table and pie chart
-    if model == "Natural Language Toolkit (NLTK)":        
+    if model == "Natural Language Toolkit (NLTK)":
         nltk_result = analyser.analyse_comment(True, comment)
         col1, col2 = st.columns(2)
-        with col1: 
-            st.caption('Comment')     
+        with col1:
+            st.caption('Comment')
             st.dataframe(nltk_result.style.applymap(
                 na.colour_sentiment, subset=['compound']))
         with col2:
             chart.pie_chart(nltk_result, 'Sentiment Makeup:')
     else:
-        roberta_result = analyser.analyse_comment(False, comment) 
+        roberta_result = analyser.analyse_comment(False, comment)
         col1, col2 = st.columns(2)
-        with col1:  
-            st.caption('Comment')        
+        with col1:
+            st.caption('Comment')
             st.dataframe(roberta_result.style.applymap(
                 na.colour_sentiment, subset=['compound']))
         with col2:
             chart.pie_chart(roberta_result, 'Sentiment Makeup:')
-
-    
 
 
 def select_post(analyser: Analyser):
