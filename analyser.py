@@ -9,9 +9,6 @@ import chart
 import csv_handler
 from sentiment_analyser import Sentiment_Analyser
 
-# nltk.download('popular')
-# nltk.download('vader_lexicon')
-
 
 class Analyser:
 

@@ -6,13 +6,12 @@ from transformers import AutoModelForSequenceClassification
 from scipy.special import softmax
 import numpy as np
 
-# nltk.download('popular')
-# nltk.download('vader_lexicon')
-
 
 class Sentiment_Analyser:
 
     def __init__(self, path=None, rows=1):
+        nltk.download('popular')
+        nltk.download('vader_lexicon')
         self.sia = SentimentIntensityAnalyzer()
         self.dataframe = pd.DataFrame()
         if path:

@@ -30,6 +30,7 @@ def word_cloud(dataset, title):
 
 def bar_chart(dataset, title = 'Sentiment Count:'):
     st.caption(title)
+    print(dataset)
     bar_chart = px.bar(
         data_frame=dataset,
         x=["negative", "neutral", "positive"],

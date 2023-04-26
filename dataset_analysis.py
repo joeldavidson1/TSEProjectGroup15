@@ -36,7 +36,8 @@ def dataset_analysis_UI():
             st.download_button('Download raw data', f,
                                 file_name='nltk_analysis_results.csv')
     else:
-        st.dataframe(na.roberta_results)
+        st.dataframe(na.roberta_results.style.applymap(
+            na.colour_sentiment, subset=['compound']))
         with open('dataset/roberta_analysis_results.csv', 'rb') as f:
             st.download_button('Download raw data', f,
                                 file_name='roberta_analysis_results.csv')
@@ -51,7 +52,7 @@ def dataset_analysis_UI():
         chart.pie_chart(counts)
     with col2:
         if model == "Natural Language Toolkit (NLTK)":
-                results = na.count_sentiments(na.sia_results)
+            results = na.count_sentiments(na.sia_results)
         else:
             results = na.count_sentiments(na.roberta_results)
         chart.bar_chart(results)
