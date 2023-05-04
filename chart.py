@@ -22,23 +22,23 @@ def word_cloud(dataset, title):
     text = dataset['word'].values
     string_text = ' '.join(text)
 
-    wc = WordCloud().generate(string_text)
-
+    wc = WordCloud(background_color="rgba(255, 255, 255, 0)", mode="RGBA").generate(string_text)
     st.caption(title)
     st.image(wc.to_array(), width=550)
 
 
-def bar_chart(dataset, title = 'Sentiment Count:'):
-    st.caption(title)
-    print(dataset)
+def bar_chart(dataset, title = 'Sentiment Count:'):   
+    formatted_dataset = {
+        'Sentiment':["negative", "neutral", "positive"],
+        'Number of Comments': [dataset['negative'][0], dataset['neutral'][0], dataset['positive'][0]]          
+                         }
     bar_chart = px.bar(
-        data_frame=dataset,
-        x=["negative", "neutral", "positive"],
-        y="value",
-        orientation="v",
-        color_discrete_sequence=["red", "#FFD700", "green"]
-    ).update_layout(xaxis_title="Sentiment Count:", yaxis_title="Number of comments")
-    bar_chart.update_xaxes(tickvals=(1, 2, 3), ticktext=[
-                           "negative", "neutral", "positive"])
-
+        data_frame=formatted_dataset,
+        x = 'Sentiment',
+        y = 'Number of Comments',
+        orientation="v"
+    ).update_layout(xaxis_title="Sentiment", yaxis_title="Number of Comments")
+    bar_chart.update_xaxes(type = 'category')
+    bar_chart.update_traces(marker_color = ["red", "#FFD700", "green"])
+    st.caption(title)
     st.plotly_chart(bar_chart)
