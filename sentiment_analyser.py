@@ -71,7 +71,7 @@ class Sentiment_Analyser:
         MODEL = "cardiffnlp/twitter-roberta-base-sentiment"
 
         print("Roberta: Creating Tokenizer")
-        tokenizer = AutoTokenizer.from_pretrained(MODEL)
+        tokenizer = AutoTokenizer.from_pretrained(MODEL, model_max_length=512) # max length for roberta = 512
     
         print("Roberta: Classifying Model")
         model = AutoModelForSequenceClassification.from_pretrained(MODEL)
@@ -79,7 +79,7 @@ class Sentiment_Analyser:
 
     def roberta_sentiment(self, text_sample, MODEL, tokenizer, model):
         # tokenizer encodes text to binary for the model to analyse
-        encoded_text = tokenizer(text_sample, return_tensors='pt')
+        encoded_text = tokenizer(text_sample, return_tensors='pt', truncation = True)
 
         # output as numbers the results of the analysis
         output = model(**encoded_text)

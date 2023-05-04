@@ -6,7 +6,7 @@ from precompute import Precompute
 
 number_of_comments = 2500  # number of comments to analyze
 
-@st.cache_data  # @st.cache # - for joel
+@st.cache_data(persist="disk")  # @st.cache # - for joel
 # allows heavy computation to run only once
 def pre_compute_analysis():
      p = Precompute()
@@ -29,7 +29,7 @@ if __name__ == '__main__':
     if page == "About":
         about.about_UI()
     elif page == "Dataset Analysis":
-        dataset_analysis.dataset_analysis_UI()
+        dataset_analysis.dataset_analysis_UI(number_of_comments)
     elif page == "Analyse Text":
         analyse_text.analyse_text_UI()
 
