@@ -26,3 +26,9 @@ class Precompute:
                 nltk_analysis_results, 'nltk_analysis_results.csv')
             csv_handler.write_to_csv(
                 roberta_analysis_results, 'roberta_analysis_results.csv')
+     
+
+if __name__ == '__main__':
+   number_of_comments = 10000
+   p = Precompute()
+   p.precompute_analysis('dataset/fb_news_comments_20K_hashed.csv', number_of_comments)

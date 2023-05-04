@@ -4,7 +4,7 @@ import analyse_text
 import dataset_analysis
 from precompute import Precompute
 
-number_of_comments = 6  # number of comments to analyze
+number_of_comments = 2500  # number of comments to analyze
 
 @st.cache_data  # @st.cache # - for joel
 # allows heavy computation to run only once
