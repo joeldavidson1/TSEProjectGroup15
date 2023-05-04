@@ -9,8 +9,8 @@ class Precompute:
 
     def precompute_analysis(self, path, number_of_rows):
         # only compute if an existing csv file isn't found or has a different number of rows
-        if (csv_handler.get_length_of_csv('dataset/nltk_analysis_results.csv') == number_of_rows and
-                csv_handler.get_length_of_csv('dataset/nltk_analysis_results.csv') == number_of_rows):
+        if (csv_handler.get_length_of_csv('dataset/nltk_analysis_results.csv') >= number_of_rows and
+                csv_handler.get_length_of_csv('dataset/nltk_analysis_results.csv') >= number_of_rows):
             print('precompute already done.')
             return
         else:
@@ -26,3 +26,9 @@ class Precompute:
                 nltk_analysis_results, 'nltk_analysis_results.csv')
             csv_handler.write_to_csv(
                 roberta_analysis_results, 'roberta_analysis_results.csv')
+     
+
+if __name__ == '__main__':
+   number_of_comments = 10000
+   p = Precompute()
+   p.precompute_analysis('dataset/fb_news_comments_20K_hashed.csv', number_of_comments)

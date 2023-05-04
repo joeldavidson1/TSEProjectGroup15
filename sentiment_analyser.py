@@ -26,49 +26,60 @@ class Sentiment_Analyser:
     def calc_nltk_sentiment(self):
         nltk_analysis_results = []
         for index, row in (self.dataframe.iterrows()):
-            # append the sentiment analysis results to a dictionary
-            # retain key info such as comment and post id
-            sia_sentiment_dict = {
-                'comment': row['message'],
-                'compound': calc_compound(self.sia.polarity_scores(row['message'])['neg'],
-                                          self.sia.polarity_scores(row['message'])['pos']),
-                'negative': self.sia.polarity_scores(row['message'])['neg'],
-                'neutral': self.sia.polarity_scores(row['message'])['neu'],
-                'positive': self.sia.polarity_scores(row['message'])['pos'],
-                'from_post_id': str(row['from_post_id']).split("_", 1)[1]
-            }
-            print(f'NLTK Compute: {index + 1} / {self.dataframe.shape[0]}')
-            # append the dictionaries to the list of dicts
-            nltk_analysis_results.append(sia_sentiment_dict)
+                # append the sentiment analysis results to a dictionary
+                # retain key info such as comment and post id
+                sia_sentiment_dict = {
+                    'comment': row['message'],
+                    'compound': calc_compound(self.sia.polarity_scores(row['message'])['neg'],
+                                            self.sia.polarity_scores(row['message'])['pos']),
+                    'negative': self.sia.polarity_scores(row['message'])['neg'],
+                    'neutral': self.sia.polarity_scores(row['message'])['neu'],
+                    'positive': self.sia.polarity_scores(row['message'])['pos'],
+                    'from_post_id': str(row['from_post_id']).split("_", 1)[1]
+                }
+                print(f'NLTK Compute: {index + 1} / {self.dataframe.shape[0]}')
+                # append the dictionaries to the list of dicts
+                nltk_analysis_results.append(sia_sentiment_dict)
         return pd.DataFrame(nltk_analysis_results)
 
     def calc_roberta_sentiment(self):
         roberta_analysis_results = []
-        for index, row in (self.dataframe.iterrows()):
-            # append the sentiment analysis results to a dictionary
-            # retain key info such as comment and post id
-            sentiment_scores = self.roberta_sentiment(row['message'])
-            roberta_sentiment_dict = {
-                'comment': row['message'],
-                'compound': calc_compound(sentiment_scores[0], sentiment_scores[2]),
-                'negative': sentiment_scores[0],
-                'neutral': sentiment_scores[1],
-                'positive': sentiment_scores[2],
-                'from_post_id': row['from_post_id'].split("_", 1)[1]
-            }
-            print(f'Roberta Compute: {index + 1} / {self.dataframe.shape[0]}')
-            # append the dictionaries to the list of dicts
-            roberta_analysis_results.append(roberta_sentiment_dict)
-        return pd.DataFrame(roberta_analysis_results)
 
-    def roberta_sentiment(self, text_sample):
         # obtain pre-trained model - https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment
-        MODEL = "cardiffnlp/twitter-roberta-base-sentiment"
-        tokenizer = AutoTokenizer.from_pretrained(MODEL)
-        model = AutoModelForSequenceClassification.from_pretrained(MODEL)
+        MODEL, tokenizer, model = self.load_roberta_model()
 
+        for index, row in (self.dataframe.iterrows()):
+                # append the sentiment analysis results to a dictionary
+                # retain key info such as comment and post id
+                sentiment_scores = self.roberta_sentiment(row['message'], MODEL, tokenizer, model)
+                roberta_sentiment_dict = {
+                    'comment': row['message'],
+                    'compound': calc_compound(sentiment_scores[0], sentiment_scores[2]),
+                    'negative': sentiment_scores[0],
+                    'neutral': sentiment_scores[1],
+                    'positive': sentiment_scores[2],
+                    'from_post_id': row['from_post_id'].split("_", 1)[1]
+                }
+                print(f'Roberta Compute: {index + 1} / {self.dataframe.shape[0]}')
+                # append the dictionaries to the list of dicts
+                roberta_analysis_results.append(roberta_sentiment_dict)
+        return pd.DataFrame(roberta_analysis_results)
+    
+    # load the roberta model in
+    def load_roberta_model(self):
+        print("Roberta: Loading Model")
+        MODEL = "cardiffnlp/twitter-roberta-base-sentiment"
+
+        print("Roberta: Creating Tokenizer")
+        tokenizer = AutoTokenizer.from_pretrained(MODEL, model_max_length=512) # max length for roberta = 512
+    
+        print("Roberta: Classifying Model")
+        model = AutoModelForSequenceClassification.from_pretrained(MODEL)
+        return MODEL, tokenizer, model
+
+    def roberta_sentiment(self, text_sample, MODEL, tokenizer, model):
         # tokenizer encodes text to binary for the model to analyse
-        encoded_text = tokenizer(text_sample, return_tensors='pt')
+        encoded_text = tokenizer(text_sample, return_tensors='pt', truncation = True)
 
         # output as numbers the results of the analysis
         output = model(**encoded_text)
@@ -97,7 +108,9 @@ class Sentiment_Analyser:
 
     def calc_nltk_roberta_text(self, text_sample):
         roberta_results = []
-        sentiment_scores = self.roberta_sentiment(text_sample)
+        # obtain pre-trained model - https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment
+        MODEL, tokenizer, model = self.load_roberta_model()
+        sentiment_scores = self.roberta_sentiment(text_sample, MODEL, tokenizer, model)
         roberta_sentiment_dict = {
             'comment': text_sample,
             'compound': calc_compound(sentiment_scores[0], sentiment_scores[2]),

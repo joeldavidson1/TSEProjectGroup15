@@ -4,8 +4,8 @@ from analyser import Analyser
 import chart
 
 
-def dataset_analysis_UI():
-    na = Analyser()
+def dataset_analysis_UI(number_of_rows):
+    na = Analyser(number_of_comments=number_of_rows)
     st.title('Facebook Sentiment Analysis')
     st.write("""
             ### Select an NLP model
