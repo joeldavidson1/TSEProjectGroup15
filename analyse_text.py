@@ -77,8 +77,3 @@ def analyse_text_UI():
         with col2:
             chart.word_cloud(na.create_word_frequency_dataframe(),
                              'Word Cloud of the most common words:')
-            
-
-
-
-

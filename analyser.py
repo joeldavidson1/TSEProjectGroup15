@@ -12,19 +12,19 @@ from sentiment_analyser import Sentiment_Analyser
 
 
 class Analyser:
-    def __init__(self, input_dataframe=None, number_of_comments = 1):
+    def __init__(self, input_dataframe=None, number_of_comments=1):
         self.analyser = Sentiment_Analyser()
 
         if input_dataframe is None:
             # load in precomputed sentiments
             self.sia_results = pd.read_csv(
-                'dataset/nltk_analysis_results.csv', encoding='utf8', nrows = number_of_comments)
+                'dataset/nltk_analysis_results.csv', encoding='utf8', nrows=number_of_comments)
             self.roberta_results = pd.read_csv(
-                'dataset/roberta_analysis_results.csv', encoding='utf8', nrows = number_of_comments)
+                'dataset/roberta_analysis_results.csv', encoding='utf8', nrows=number_of_comments)
             # read in the same data from the dataset
             rows = len(self.sia_results)
             self.dataframe = pd.read_csv(
-                'dataset/fb_news_comments_20K_hashed.csv', encoding='utf8', nrows = number_of_comments)
+                'dataset/fb_news_comments_20K_hashed.csv', encoding='utf8', nrows=number_of_comments)
             self.posts_dataframe = pd.read_csv(
                 'dataset/fb_news_posts_20K.csv', nrows=rows, encoding='utf8')
         else:

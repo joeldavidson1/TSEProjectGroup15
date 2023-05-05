@@ -11,9 +11,9 @@ def dataset_analysis_UI(number_of_rows):
             ### Select an NLP model
             Choose between the two different sentiment analysis models
             """)
-    st.sidebar.write("""
+    st.sidebar.write(f"""
     ## About
-    This is a statistical analysis of several thousand Facebook comments from the dataset: https://github.com/jbencina/facebook-news. The analysis aims to show the polarizing nature of facebook comments.
+    This is a statistical analysis of {number_of_rows} thousand Facebook comments from the dataset: https://github.com/jbencina/facebook-news. The analysis aims to show the polarizing nature of facebook comments.
     """)
 
     model = st.selectbox("Select a model", [
@@ -26,7 +26,8 @@ def dataset_analysis_UI(number_of_rows):
     else:
         st.write("## Hugging Face RoBERTa")
 
-    st.subheader('Overall Sentiment Data')
+    st.subheader(
+        f'Overall Sentiment Data - {number_of_rows} comments analysed')
     st.caption('The dataset:')
     if model == "Natural Language Toolkit (NLTK)":
         st.dataframe(na.sia_results.style.applymap(
