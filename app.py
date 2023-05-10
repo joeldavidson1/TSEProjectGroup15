@@ -10,6 +10,14 @@ number_of_comments = 2500  # number of comments to analyze
 @st.cache_data(persist="disk")  # @st.cache # - for joel
 # allows heavy computation to run only once
 def pre_compute_analysis():
+    """
+    Analyse dataset once and save results as csv's
+
+    Parameters
+    ----------
+    None
+
+    """
     p = Precompute()
     p.precompute_analysis(
         'dataset/fb_news_comments_20K_hashed.csv', number_of_comments)

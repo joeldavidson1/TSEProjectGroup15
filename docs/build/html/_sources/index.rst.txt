@@ -13,10 +13,11 @@ Check out the :doc:`usage` section for further information, including how to
 :ref:`install <installation>` the project.
 
 .. toctree::
+   usage
+   code
    :maxdepth: 2
    :caption: Contents:
-   usage
-   api
+   
 
 
 Indices and tables
