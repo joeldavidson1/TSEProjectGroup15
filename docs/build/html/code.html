@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="Usage" href="usage.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Unit Test Documentation" href="unit_tests.html" /><link rel="prev" title="Usage" href="usage.html" />
 
     <!-- Generated with Sphinx 5.3.0 and Furo 2023.03.27 -->
-        <title>Code - Facebook Sentimental Analysis 0.2 documentation</title>
+        <title>Code Documentation - Facebook Sentimental Analysis 0.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -157,7 +157,8 @@
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Code</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Code Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unit_tests.html">Unit Test Documentation</a></li>
 </ul>
 
 </div>
@@ -192,8 +193,11 @@
           </label>
         </div>
         <article role="main">
-          <section id="code">
-<h1>Code<a class="headerlink" href="#code" title="Permalink to this heading">#</a></h1>
+          <section id="code-documentation">
+<h1>Code Documentation<a class="headerlink" href="#code-documentation" title="Permalink to this heading">#</a></h1>
+<p>Check out the <a class="reference internal" href="usage.html"><span class="doc">Usage</span></a> section for information on how to run the code, including how to
+<a class="reference internal" href="usage.html#installation"><span class="std std-ref">install</span></a> the project.</p>
+<p>Check out the <a class="reference internal" href="unit_tests.html"><span class="doc">Unit Test Documentation</span></a> section for unit tests performed on the code outlined below.</p>
 <section id="module-app">
 <span id="app"></span><h2>App<a class="headerlink" href="#module-app" title="Permalink to this heading">#</a></h2>
 <dl class="py function">
@@ -223,7 +227,7 @@ using the Precompute class</p>
 
 </section>
 <section id="analyser">
-<h2>Analyser<a class="headerlink" href="#analyser" title="Permalink to this heading">#</a></h2>
+<span id="id1"></span><h2>Analyser<a class="headerlink" href="#analyser" title="Permalink to this heading">#</a></h2>
 <span class="target" id="module-analyser"></span><dl class="py class">
 <dt class="sig sig-object py" id="analyser.Analyser">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">analyser.</span></span><span class="sig-name descname"><span class="pre">Analyser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#analyser.Analyser" title="Permalink to this definition">#</a></dt>
@@ -233,7 +237,7 @@ using the Precompute class</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>input_dataframe</strong> (<em>Panda Dataframe</em><em>, </em><em>optional</em>) – A Dataframe that needs to be analysed.
 If None then a Dataframe is read in from the default csv</p></li>
-<li><p><strong>number_of_comments</strong> (<em>int</em><em>, </em><em>optional</em>) – Only required if no Dataframe is given.
+<li><p><strong>number_of_comments</strong> (<em>Int</em><em>, </em><em>optional</em>) – Only required if no Dataframe is given.
 The number of comments within the csv to be read in as a Dataframe.</p></li>
 </ul>
 </dd>
@@ -321,7 +325,7 @@ The number of comments within the csv to be read in as a Dataframe.</p></li>
 <dd><p>boundary used for sentiment categorising</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
+<dd class="field-odd"><p>Int</p>
 </dd>
 </dl>
 </dd></dl>
@@ -341,7 +345,370 @@ The number of comments within the csv to be read in as a Dataframe.</p></li>
 <dd class="field-even"><p>A Dataframe containing the comment and its analysed sentiment</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>analysed_comment (Panda Dataframe)</p>
+<dd class="field-odd"><p>Panda Dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="analyser.Analyser.calc_word_frequency">
+<span class="sig-name descname"><span class="pre">calc_word_frequency</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#analyser.Analyser.calc_word_frequency" title="Permalink to this definition">#</a></dt>
+<dd><p>Calculate word frequency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An array of words and their frequencies</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>2d Array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="analyser.Analyser.colour_sentiment">
+<span class="sig-name descname"><span class="pre">colour_sentiment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#analyser.Analyser.colour_sentiment" title="Permalink to this definition">#</a></dt>
+<dd><p>set the colour to red, orange or green of a cell by categorising its value between boundaries</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>val</strong> (<em>int</em>) – The value to categorise</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A formatted string stating the colour of the cell</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>String</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="analyser.Analyser.count_sentiments">
+<span class="sig-name descname"><span class="pre">count_sentiments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#analyser.Analyser.count_sentiments" title="Permalink to this definition">#</a></dt>
+<dd><p>Count the number of positive, neutral and negative comments in a dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dataset</strong> (<em>Panda Dataframe</em>) – The dataset to search through</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The total number of each category present in the dataset</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Panda Dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="analyser.Analyser.create_word_frequency_dataframe">
+<span class="sig-name descname"><span class="pre">create_word_frequency_dataframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#analyser.Analyser.create_word_frequency_dataframe" title="Permalink to this definition">#</a></dt>
+<dd><p>Calculate word frequency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A Dataframe containing the words (string) and their frequencies (int)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Panda Dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="analyser.Analyser.filter_by_post">
+<span class="sig-name descname"><span class="pre">filter_by_post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">post_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nltk_option</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#analyser.Analyser.filter_by_post" title="Permalink to this definition">#</a></dt>
+<dd><p>Filter results by post id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>post_id</strong> (<em>string</em>) – The id of the post to filter by</p></li>
+<li><p><strong>nltk_option</strong> (<em>bool</em>) – whether to use nltk or roberta for the analysis</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A Dataframe containing the filtered comments</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Panda Dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="analyser.Analyser.get_all_comments">
+<span class="sig-name descname"><span class="pre">get_all_comments</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#analyser.Analyser.get_all_comments" title="Permalink to this definition">#</a></dt>
+<dd><p>Concatenate all the comments into one string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A Dataframe containing the concatenated string</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Panda Dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="analyser.parse_messages_for_analysis">
+<span class="sig-prename descclassname"><span class="pre">analyser.</span></span><span class="sig-name descname"><span class="pre">parse_messages_for_analysis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comments</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#analyser.parse_messages_for_analysis" title="Permalink to this definition">#</a></dt>
+<dd><p>Parse the comments for analysis</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>comments</strong> (<em>String</em>) – The comments to parse</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A copy of the input comments without non-words and stop words</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>String</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="analyser.remove_non_words">
+<span class="sig-prename descclassname"><span class="pre">analyser.</span></span><span class="sig-name descname"><span class="pre">remove_non_words</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comments</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#analyser.remove_non_words" title="Permalink to this definition">#</a></dt>
+<dd><p>Remove any tokens which aren’t letters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>comments</strong> (<em>String</em>) – The comments to sort through</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A copy of the input comments without non alphabet letters (a-z)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>String</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="analyser.remove_stop_words">
+<span class="sig-prename descclassname"><span class="pre">analyser.</span></span><span class="sig-name descname"><span class="pre">remove_stop_words</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comments</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#analyser.remove_stop_words" title="Permalink to this definition">#</a></dt>
+<dd><p>Remove stop words e.g. “to”, “an”, “a”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>comments</strong> (<em>String</em>) – The comments to sort through</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A copy of the input comments without stop words</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>String</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="analyser.tokenize_words">
+<span class="sig-prename descclassname"><span class="pre">analyser.</span></span><span class="sig-name descname"><span class="pre">tokenize_words</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comments</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#analyser.tokenize_words" title="Permalink to this definition">#</a></dt>
+<dd><p>Tokenize all comments</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>comments</strong> (<em>String</em>) – The comments to tokenize</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tokenize copy of the input comments</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>String</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-chart">
+<span id="chart"></span><h2>Chart<a class="headerlink" href="#module-chart" title="Permalink to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="chart.bar_chart">
+<span class="sig-prename descclassname"><span class="pre">chart.</span></span><span class="sig-name descname"><span class="pre">bar_chart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Sentiment</span> <span class="pre">Count:'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chart.bar_chart" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a streamlit bar chart using the totals within the dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> (<em>Panda Dataframe</em>) – The data to display</p></li>
+<li><p><strong>title</strong> (<em>String</em>) – The title of the chart</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chart.pie_chart">
+<span class="sig-prename descclassname"><span class="pre">chart.</span></span><span class="sig-name descname"><span class="pre">pie_chart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Overall</span> <span class="pre">Sentiment</span> <span class="pre">Makeup:'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chart.pie_chart" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a streamlit pie chart using the totals within the dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> (<em>Panda Dataframe</em>) – The data to display</p></li>
+<li><p><strong>title</strong> (<em>String</em>) – The title of the chart</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chart.word_cloud">
+<span class="sig-prename descclassname"><span class="pre">chart.</span></span><span class="sig-name descname"><span class="pre">word_cloud</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chart.word_cloud" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a streamlit wordlcloud using the frequencies within the dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> (<em>Panda Dataframe</em>) – The data to display</p></li>
+<li><p><strong>title</strong> (<em>String</em>) – The title of the chart</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="csv-handler">
+<span id="id2"></span><h2>CSV Handler<a class="headerlink" href="#csv-handler" title="Permalink to this heading">#</a></h2>
+<span class="target" id="module-csv_handler"></span><dl class="py function">
+<dt class="sig sig-object py" id="csv_handler.get_length_of_csv">
+<span class="sig-prename descclassname"><span class="pre">csv_handler.</span></span><span class="sig-name descname"><span class="pre">get_length_of_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csv_handler.get_length_of_csv" title="Permalink to this definition">#</a></dt>
+<dd><p>Get the length of a given csv file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>string</em>) – The filename of the file to read</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The length of the csv if found, else -1</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="csv_handler.pd_dataframe_to_csv">
+<span class="sig-prename descclassname"><span class="pre">csv_handler.</span></span><span class="sig-name descname"><span class="pre">pd_dataframe_to_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csv_handler.pd_dataframe_to_csv" title="Permalink to this definition">#</a></dt>
+<dd><p>Convert a dataframe to csv format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dataframe</strong> (<em>Panda Dataframe</em>) – The dataset to convert</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The csv formatted dataframe</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>String</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="csv_handler.remove_long_strings">
+<span class="sig-prename descclassname"><span class="pre">csv_handler.</span></span><span class="sig-name descname"><span class="pre">remove_long_strings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_string_length</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csv_handler.remove_long_strings" title="Permalink to this definition">#</a></dt>
+<dd><p>removes any rows which messages are too long to analyse</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dataframe</strong> (<em>Panda Dataframe</em>) – The dataset to parse</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A parsed copy of the dataset</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Panda Dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="csv_handler.remove_na">
+<span class="sig-prename descclassname"><span class="pre">csv_handler.</span></span><span class="sig-name descname"><span class="pre">remove_na</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csv_handler.remove_na" title="Permalink to this definition">#</a></dt>
+<dd><p>removes any rows which messages are null</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dataframe</strong> (<em>Panda Dataframe</em>) – The dataset to parse</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A parsed copy of the dataset</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Panda Dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="csv_handler.write_to_csv">
+<span class="sig-prename descclassname"><span class="pre">csv_handler.</span></span><span class="sig-name descname"><span class="pre">write_to_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csv_handler.write_to_csv" title="Permalink to this definition">#</a></dt>
+<dd><p>Save a dataframe to a csv file within the ‘dataset’ folder</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>Panda Dataframe</em>) – The data to save</p></li>
+<li><p><strong>filename</strong> (<em>String</em>) – The filename of the csv file</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="dataset-analysis">
+<h2>Dataset Analysis<a class="headerlink" href="#dataset-analysis" title="Permalink to this heading">#</a></h2>
+<span class="target" id="module-dataset_analysis"></span><dl class="py function">
+<dt class="sig sig-object py" id="dataset_analysis.dataset_analysis_UI">
+<span class="sig-prename descclassname"><span class="pre">dataset_analysis.</span></span><span class="sig-name descname"><span class="pre">dataset_analysis_UI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number_of_rows</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dataset_analysis.dataset_analysis_UI" title="Permalink to this definition">#</a></dt>
+<dd><p>Create the dataset section of the website</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>number_of_rows</strong> (<em>Int</em>) – The number of rows to show / analyse</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataset_analysis.post_analysis_UI">
+<span class="sig-prename descclassname"><span class="pre">dataset_analysis.</span></span><span class="sig-name descname"><span class="pre">post_analysis_UI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">analyser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#analyser.Analyser" title="analyser.Analyser"><span class="pre">Analyser</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">nltk_analysis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dataset_analysis.post_analysis_UI" title="Permalink to this definition">#</a></dt>
+<dd><p>Create the post section of the website</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>analyser</strong> (<a class="reference internal" href="#analyser.Analyser" title="analyser.Analyser"><em>Analyser</em></a>) – analyser object</p></li>
+<li><p><strong>nltk_analysis</strong> (<em>bool</em>) – type of analysis to use (nltk / roberta)</p></li>
+<li><p><strong>model</strong> (<em>str</em>) – the model to use</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataset_analysis.select_post">
+<span class="sig-prename descclassname"><span class="pre">dataset_analysis.</span></span><span class="sig-name descname"><span class="pre">select_post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">analyser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#analyser.Analyser" title="analyser.Analyser"><span class="pre">Analyser</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dataset_analysis.select_post" title="Permalink to this definition">#</a></dt>
+<dd><p>create select by post dropdown (select box)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>analyser</strong> (<a class="reference internal" href="#analyser.Analyser" title="analyser.Analyser"><em>Analyser</em></a>) – analyser object</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Streamlit ID for the created select box</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>String</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="precompute">
+<h2>Precompute<a class="headerlink" href="#precompute" title="Permalink to this heading">#</a></h2>
+<span class="target" id="module-precompute"></span><dl class="py class">
+<dt class="sig sig-object py" id="precompute.Precompute">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">precompute.</span></span><span class="sig-name descname"><span class="pre">Precompute</span></span><a class="headerlink" href="#precompute.Precompute" title="Permalink to this definition">#</a></dt>
+<dd><p>A class which handles the pre-computation of the dataset</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="precompute.Precompute.precompute_analysis">
+<span class="sig-name descname"><span class="pre">precompute_analysis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_rows</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#precompute.Precompute.precompute_analysis" title="Permalink to this definition">#</a></dt>
+<dd><p>Read in precomputed values (csv files) if available else create them</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>String</em>) – The path to the dataset</p></li>
+<li><p><strong>number_of_rows</strong> (<em>int</em>) – The number of rows to analyse</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -349,18 +716,155 @@ The number of comments within the csv to be read in as a Dataframe.</p></li>
 </dd></dl>
 
 </section>
-<section id="module-chart">
-<span id="chart"></span><h2>Chart<a class="headerlink" href="#module-chart" title="Permalink to this heading">#</a></h2>
+<section id="sentiment-analyser">
+<span id="id3"></span><h2>Sentiment Analyser<a class="headerlink" href="#sentiment-analyser" title="Permalink to this heading">#</a></h2>
+<span class="target" id="module-sentiment_analyser"></span><dl class="py class">
+<dt class="sig sig-object py" id="sentiment_analyser.Sentiment_Analyser">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sentiment_analyser.</span></span><span class="sig-name descname"><span class="pre">Sentiment_Analyser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sentiment_analyser.Sentiment_Analyser" title="Permalink to this definition">#</a></dt>
+<dd><p>A class which handles the analysis of a Panda Dataframe</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path=None</strong> – </p></li>
+<li><p><strong>rows=1</strong> – </p></li>
+<li><p><strong>path</strong> (<em>String</em><em>, </em><em>optional</em>) – The path to a csv formatted dataset
+If None then an empty Dataframe is created</p></li>
+<li><p><strong>rows</strong> (<em>Int</em><em>, </em><em>optional</em>) – Only required if a path is given.
+The number of comments within the csv to be read in as a Dataframe.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sentiment_analyser.Sentiment_Analyser.dataframe">
+<span class="sig-name descname"><span class="pre">dataframe</span></span><a class="headerlink" href="#sentiment_analyser.Sentiment_Analyser.dataframe" title="Permalink to this definition">#</a></dt>
+<dd><p>Overall dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Panda Dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sentiment_analyser.Sentiment_Analyser.sia">
+<span class="sig-name descname"><span class="pre">sia</span></span><a class="headerlink" href="#sentiment_analyser.Sentiment_Analyser.sia" title="Permalink to this definition">#</a></dt>
+<dd><p>NLTK Sentiment analyzer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Sentiment Intensity Analyzer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sentiment_analyser.Sentiment_Analyser.calc_nltk_roberta_text">
+<span class="sig-name descname"><span class="pre">calc_nltk_roberta_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text_sample</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sentiment_analyser.Sentiment_Analyser.calc_nltk_roberta_text" title="Permalink to this definition">#</a></dt>
+<dd><p>Calc Roberta sentiment of text</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The Roberta results (comment, negative, neutral, positive, compound)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Panda Dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sentiment_analyser.Sentiment_Analyser.calc_nltk_sentiment">
+<span class="sig-name descname"><span class="pre">calc_nltk_sentiment</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sentiment_analyser.Sentiment_Analyser.calc_nltk_sentiment" title="Permalink to this definition">#</a></dt>
+<dd><p>Calc NLTK sentiment of dataframe</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A Dataframe containing the analysed sentiment of the original dataframe</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Panda Dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sentiment_analyser.Sentiment_Analyser.calc_nltk_sentiment_text">
+<span class="sig-name descname"><span class="pre">calc_nltk_sentiment_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text_sample</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sentiment_analyser.Sentiment_Analyser.calc_nltk_sentiment_text" title="Permalink to this definition">#</a></dt>
+<dd><p>Calc NLTK sentiment of text</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The NLTK results (comment, negative, neutral, positive, compound)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Panda Dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sentiment_analyser.Sentiment_Analyser.calc_roberta_sentiment">
+<span class="sig-name descname"><span class="pre">calc_roberta_sentiment</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sentiment_analyser.Sentiment_Analyser.calc_roberta_sentiment" title="Permalink to this definition">#</a></dt>
+<dd><p>Calc Roberta sentiment of dataframe</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A Dataframe containing the analysed sentiment of the original dataframe</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Panda Dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sentiment_analyser.Sentiment_Analyser.load_roberta_model">
+<span class="sig-name descname"><span class="pre">load_roberta_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sentiment_analyser.Sentiment_Analyser.load_roberta_model" title="Permalink to this definition">#</a></dt>
+<dd><p>Load in the roberta model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><em>String</em> – model used</p></li>
+<li><p><em>AutoTokenizer</em> – tokenizer to parse strings</p></li>
+<li><p><em>AutoModelForSequenceClassification</em> – pre-trained roberta model</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sentiment_analyser.Sentiment_Analyser.roberta_sentiment">
+<span class="sig-name descname"><span class="pre">roberta_sentiment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text_sample</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MODEL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sentiment_analyser.Sentiment_Analyser.roberta_sentiment" title="Permalink to this definition">#</a></dt>
+<dd><p>Calc NLTK sentiment of text</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of the NLTK results (negative, neutral, positive, compound)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of Ints</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sentiment_analyser.calc_compound">
+<span class="sig-prename descclassname"><span class="pre">sentiment_analyser.</span></span><span class="sig-name descname"><span class="pre">calc_compound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">negative</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">positive</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sentiment_analyser.calc_compound" title="Permalink to this definition">#</a></dt>
+<dd><p>Calculate compound sentiment through the difference between positive and negative components</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>negative</strong> (<em>int</em>) – The negative sentiment</p></li>
+<li><p><strong>positive</strong> (<em>int</em>) – The postive sentiment</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The difference between positive and negative (compound)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Int</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
-<section id="csv-handler">
-<h2>CSV Handler<a class="headerlink" href="#csv-handler" title="Permalink to this heading">#</a></h2>
-<span class="target" id="module-csv_handler"></span></section>
-<section id="dataset-analysis">
-<h2>Dataset Analysis<a class="headerlink" href="#dataset-analysis" title="Permalink to this heading">#</a></h2>
-<span class="target" id="module-dataset_analysis"></span></section>
-<section id="precompute">
-<h2>Precompute<a class="headerlink" href="#precompute" title="Permalink to this heading">#</a></h2>
-<span class="target" id="module-precompute"></span></section>
 </section>
 
         </article>
@@ -368,7 +872,15 @@ The number of comments within the csv to be read in as a Dataframe.</p></li>
       <footer>
         
         <div class="related-pages">
-          
+          <a class="next-page" href="unit_tests.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Unit Test Documentation</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
           <a class="prev-page" href="usage.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
@@ -410,7 +922,7 @@ The number of comments within the csv to be read in as a Dataframe.</p></li>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Code</a><ul>
+<li><a class="reference internal" href="#">Code Documentation</a><ul>
 <li><a class="reference internal" href="#module-app">App</a><ul>
 <li><a class="reference internal" href="#app.pre_compute_analysis"><code class="docutils literal notranslate"><span class="pre">pre_compute_analysis()</span></code></a></li>
 </ul>
@@ -434,14 +946,62 @@ The number of comments within the csv to be read in as a Dataframe.</p></li>
 <li><a class="reference internal" href="#analyser.Analyser.word_frequency"><code class="docutils literal notranslate"><span class="pre">Analyser.word_frequency</span></code></a></li>
 <li><a class="reference internal" href="#analyser.Analyser.boundary"><code class="docutils literal notranslate"><span class="pre">Analyser.boundary</span></code></a></li>
 <li><a class="reference internal" href="#analyser.Analyser.analyse_comment"><code class="docutils literal notranslate"><span class="pre">Analyser.analyse_comment()</span></code></a></li>
+<li><a class="reference internal" href="#analyser.Analyser.calc_word_frequency"><code class="docutils literal notranslate"><span class="pre">Analyser.calc_word_frequency()</span></code></a></li>
+<li><a class="reference internal" href="#analyser.Analyser.colour_sentiment"><code class="docutils literal notranslate"><span class="pre">Analyser.colour_sentiment()</span></code></a></li>
+<li><a class="reference internal" href="#analyser.Analyser.count_sentiments"><code class="docutils literal notranslate"><span class="pre">Analyser.count_sentiments()</span></code></a></li>
+<li><a class="reference internal" href="#analyser.Analyser.create_word_frequency_dataframe"><code class="docutils literal notranslate"><span class="pre">Analyser.create_word_frequency_dataframe()</span></code></a></li>
+<li><a class="reference internal" href="#analyser.Analyser.filter_by_post"><code class="docutils literal notranslate"><span class="pre">Analyser.filter_by_post()</span></code></a></li>
+<li><a class="reference internal" href="#analyser.Analyser.get_all_comments"><code class="docutils literal notranslate"><span class="pre">Analyser.get_all_comments()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#analyser.parse_messages_for_analysis"><code class="docutils literal notranslate"><span class="pre">parse_messages_for_analysis()</span></code></a></li>
+<li><a class="reference internal" href="#analyser.remove_non_words"><code class="docutils literal notranslate"><span class="pre">remove_non_words()</span></code></a></li>
+<li><a class="reference internal" href="#analyser.remove_stop_words"><code class="docutils literal notranslate"><span class="pre">remove_stop_words()</span></code></a></li>
+<li><a class="reference internal" href="#analyser.tokenize_words"><code class="docutils literal notranslate"><span class="pre">tokenize_words()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-chart">Chart</a><ul>
+<li><a class="reference internal" href="#chart.bar_chart"><code class="docutils literal notranslate"><span class="pre">bar_chart()</span></code></a></li>
+<li><a class="reference internal" href="#chart.pie_chart"><code class="docutils literal notranslate"><span class="pre">pie_chart()</span></code></a></li>
+<li><a class="reference internal" href="#chart.word_cloud"><code class="docutils literal notranslate"><span class="pre">word_cloud()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#csv-handler">CSV Handler</a><ul>
+<li><a class="reference internal" href="#csv_handler.get_length_of_csv"><code class="docutils literal notranslate"><span class="pre">get_length_of_csv()</span></code></a></li>
+<li><a class="reference internal" href="#csv_handler.pd_dataframe_to_csv"><code class="docutils literal notranslate"><span class="pre">pd_dataframe_to_csv()</span></code></a></li>
+<li><a class="reference internal" href="#csv_handler.remove_long_strings"><code class="docutils literal notranslate"><span class="pre">remove_long_strings()</span></code></a></li>
+<li><a class="reference internal" href="#csv_handler.remove_na"><code class="docutils literal notranslate"><span class="pre">remove_na()</span></code></a></li>
+<li><a class="reference internal" href="#csv_handler.write_to_csv"><code class="docutils literal notranslate"><span class="pre">write_to_csv()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dataset-analysis">Dataset Analysis</a><ul>
+<li><a class="reference internal" href="#dataset_analysis.dataset_analysis_UI"><code class="docutils literal notranslate"><span class="pre">dataset_analysis_UI()</span></code></a></li>
+<li><a class="reference internal" href="#dataset_analysis.post_analysis_UI"><code class="docutils literal notranslate"><span class="pre">post_analysis_UI()</span></code></a></li>
+<li><a class="reference internal" href="#dataset_analysis.select_post"><code class="docutils literal notranslate"><span class="pre">select_post()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#precompute">Precompute</a><ul>
+<li><a class="reference internal" href="#precompute.Precompute"><code class="docutils literal notranslate"><span class="pre">Precompute</span></code></a><ul>
+<li><a class="reference internal" href="#precompute.Precompute.precompute_analysis"><code class="docutils literal notranslate"><span class="pre">Precompute.precompute_analysis()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-chart">Chart</a></li>
-<li><a class="reference internal" href="#csv-handler">CSV Handler</a></li>
-<li><a class="reference internal" href="#dataset-analysis">Dataset Analysis</a></li>
-<li><a class="reference internal" href="#precompute">Precompute</a></li>
+<li><a class="reference internal" href="#sentiment-analyser">Sentiment Analyser</a><ul>
+<li><a class="reference internal" href="#sentiment_analyser.Sentiment_Analyser"><code class="docutils literal notranslate"><span class="pre">Sentiment_Analyser</span></code></a><ul>
+<li><a class="reference internal" href="#sentiment_analyser.Sentiment_Analyser.dataframe"><code class="docutils literal notranslate"><span class="pre">Sentiment_Analyser.dataframe</span></code></a></li>
+<li><a class="reference internal" href="#sentiment_analyser.Sentiment_Analyser.sia"><code class="docutils literal notranslate"><span class="pre">Sentiment_Analyser.sia</span></code></a></li>
+<li><a class="reference internal" href="#sentiment_analyser.Sentiment_Analyser.calc_nltk_roberta_text"><code class="docutils literal notranslate"><span class="pre">Sentiment_Analyser.calc_nltk_roberta_text()</span></code></a></li>
+<li><a class="reference internal" href="#sentiment_analyser.Sentiment_Analyser.calc_nltk_sentiment"><code class="docutils literal notranslate"><span class="pre">Sentiment_Analyser.calc_nltk_sentiment()</span></code></a></li>
+<li><a class="reference internal" href="#sentiment_analyser.Sentiment_Analyser.calc_nltk_sentiment_text"><code class="docutils literal notranslate"><span class="pre">Sentiment_Analyser.calc_nltk_sentiment_text()</span></code></a></li>
+<li><a class="reference internal" href="#sentiment_analyser.Sentiment_Analyser.calc_roberta_sentiment"><code class="docutils literal notranslate"><span class="pre">Sentiment_Analyser.calc_roberta_sentiment()</span></code></a></li>
+<li><a class="reference internal" href="#sentiment_analyser.Sentiment_Analyser.load_roberta_model"><code class="docutils literal notranslate"><span class="pre">Sentiment_Analyser.load_roberta_model()</span></code></a></li>
+<li><a class="reference internal" href="#sentiment_analyser.Sentiment_Analyser.roberta_sentiment"><code class="docutils literal notranslate"><span class="pre">Sentiment_Analyser.roberta_sentiment()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sentiment_analyser.calc_compound"><code class="docutils literal notranslate"><span class="pre">calc_compound()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

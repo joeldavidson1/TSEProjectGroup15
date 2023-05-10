@@ -2,12 +2,20 @@ from sentiment_analyser import Sentiment_Analyser, calc_compound
 import nltk
 
 
-def test_cacl_compound() -> None:
+def test_calc_compound() -> None:
+    """
+    Tests the calc compound function
+
+    """
     compound_sum = calc_compound(-0.55, 0.45)
     assert compound_sum == 1
 
 
 def test_calc_nltk_sentiment_text() -> None:
+    """
+    Tests the calc nltk sentiment text function
+
+    """
     sia = Sentiment_Analyser()
     text_sample = 'This is good sample text'
     test = {
@@ -26,6 +34,10 @@ def test_calc_nltk_sentiment_text() -> None:
 
 
 def test_calc_robert_sentiment_text() -> None:
+    """
+    Tests the calc roberta sentiment text function
+
+    """
     sia = Sentiment_Analyser()
     text_sample = 'This is good sample text'
     test = {

@@ -31,6 +31,8 @@ test streamlit by running in terminal:
 * streamlit hello
 press Enter. After it should open a web page.
 
+.. _units:
+
 Unit testing
 ------------
 

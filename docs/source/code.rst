@@ -4,6 +4,8 @@ Code Documentation
 Check out the :doc:`usage` section for information on how to run the code, including how to
 :ref:`install <installation>` the project.
 
+Check out the :doc:`unit_tests` section for unit tests performed on the code outlined below.
+
 *****
 App
 *****
@@ -16,7 +18,8 @@ About
 *****
 
 .. automodule:: about
-    :members:   
+    :members: 
+
 
 *****
 Analyse Text
@@ -24,6 +27,8 @@ Analyse Text
 
 .. automodule:: analyse_text
     :members:   
+
+.. _analyser:  
 
 *****
 Analyser
@@ -38,6 +43,8 @@ Chart
 
 .. automodule:: chart
     :members:   
+
+.. _csv_handler:  
 
 *****
 CSV Handler
@@ -58,5 +65,15 @@ Precompute
 *****
 
 .. automodule:: precompute
+    :members: 
+
+.. _sentiment_analyser: 
+
+*****
+Sentiment Analyser
+*****
+
+.. automodule:: sentiment_analyser
     :members:  
+
 

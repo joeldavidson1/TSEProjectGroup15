@@ -15,6 +15,7 @@ Check out the :doc:`usage` section for further information, including how to
 .. toctree::
    usage
    code
+   unit_tests
    :maxdepth: 2
    :caption: Contents:
    
