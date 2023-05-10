@@ -5,7 +5,19 @@ from wordcloud import WordCloud
 
 
 def pie_chart(dataset, title='Overall Sentiment Makeup:'):
-    # create a pie chart using the totals
+    """
+    Create a streamlit pie chart using the totals within the dataset
+
+    Parameters
+    ----------
+    dataset : Panda Dataframe
+        The data to display
+
+    title : String
+        The title of the chart
+
+    """
+
     counts = [dataset['negative'][0], dataset['positive'][0], dataset['neutral'][0]]
     names = ['negative', 'positive', 'neutral']
     colour_dict = {'negative': 'red',
@@ -18,7 +30,19 @@ def pie_chart(dataset, title='Overall Sentiment Makeup:'):
 
 
 def word_cloud(dataset, title):
-    # Generating word cloud
+    """
+    Create a streamlit wordlcloud using the frequencies within the dataset
+
+    Parameters
+    ----------
+    dataset : Panda Dataframe
+        The data to display
+
+    title : String
+        The title of the chart
+        
+    """
+
     text = dataset['word'].values
     string_text = ' '.join(text)
 
@@ -28,6 +52,19 @@ def word_cloud(dataset, title):
 
 
 def bar_chart(dataset, title = 'Sentiment Count:'):   
+    """
+    Create a streamlit bar chart using the totals within the dataset
+
+    Parameters
+    ----------
+    dataset : Panda Dataframe
+        The data to display
+
+    title : String
+        The title of the chart
+        
+    """
+    
     formatted_dataset = {
         'Sentiment':["negative", "neutral", "positive"],
         'Number of Comments': [dataset['negative'][0], dataset['neutral'][0], dataset['positive'][0]]          

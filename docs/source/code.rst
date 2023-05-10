@@ -1,5 +1,8 @@
-Code
+Code Documentation
 ======
+
+Check out the :doc:`usage` section for information on how to run the code, including how to
+:ref:`install <installation>` the project.
 
 *****
 App
