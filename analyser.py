@@ -12,6 +12,38 @@ from sentiment_analyser import Sentiment_Analyser
 
 
 class Analyser:
+    """
+    A class which handles the analysis of a Panda Dataframe
+
+    Parameters
+    ----------
+    input_dataframe : Panda Dataframe, optional
+        A Dataframe that needs to be analysed.
+        If None then a Dataframe is read in from the default csv
+
+    number_of_comments : Int, optional
+        Only required if no Dataframe is given.
+        The number of comments within the csv to be read in as a Dataframe.
+
+    Attributes
+    ---------- 
+    analyser : Analyser
+        analyser object 
+    dataframe : Panda Dataframe
+        overall dataset
+    sia_results : Panda Dataframe
+        nltk sentiment results
+    roberta_results : Panda Dataframe
+        roberta sentiment results
+    posts_dataframe : Panda Dataframe  
+        dataset post references
+    all_comments : list of str
+        list of all comments
+    word_frequency : list of Dict (word and frequency)
+        list of all words and their frequencies
+    boundary : Int
+        boundary used for sentiment categorising
+    """
     def __init__(self, input_dataframe=None, number_of_comments=1):
         self.analyser = Sentiment_Analyser()
 
@@ -46,6 +78,22 @@ class Analyser:
         self.boundary = 0.1
 
     def analyse_comment(self, nltk_analysis: bool, comment: str):
+        """
+        Analyse an individual comment
+
+        Parameters
+        ----------
+        nltk_analysis : bool
+            whether to use nltk or roberta for the analysis
+        comment : string
+            The comment to be analysed
+
+        Returns
+        ----------
+        Panda Dataframe
+            A Dataframe containing the comment and its analysed sentiment
+    
+        """
         analysed_comment = pd.DataFrame()
 
         if nltk_analysis:
@@ -56,6 +104,15 @@ class Analyser:
         return analysed_comment
 
     def calc_word_frequency(self):
+        """
+        Calculate word frequency
+
+        Returns
+        ----------
+        2d Array
+            An array of words and their frequencies 
+    
+        """
         all_words = parse_messages_for_analysis(self.all_comments)
 
         # Top (n) most common words and their frequency in a list of dictionaries
@@ -65,6 +122,15 @@ class Analyser:
         return most_common_words
 
     def create_word_frequency_dataframe(self):
+        """
+        Calculate word frequency
+
+        Returns
+        ----------
+        Panda Dataframe
+            A Dataframe containing the words (string) and their frequencies (int)
+    
+        """
         most_common_words = self.calc_word_frequency()
 
         for i in most_common_words:
@@ -77,6 +143,22 @@ class Analyser:
 
     # return comments matching post_id
     def filter_by_post(self, post_id, nltk_option: bool):
+        """
+        Filter results by post id
+
+        Parameters
+        ----------
+        post_id : string
+            The id of the post to filter by
+        nltk_option : bool
+            whether to use nltk or roberta for the analysis        
+
+        Returns
+        ----------
+        Panda Dataframe
+            A Dataframe containing the filtered comments
+    
+        """
         if nltk_option:
             filtered_data = self.sia_results[self.sia_results['from_post_id'] == post_id]
         else:
@@ -86,6 +168,15 @@ class Analyser:
 
     # convert all the comments from the csv into one string
     def get_all_comments(self):
+        """
+        Concatenate all the comments into one string     
+
+        Returns
+        ----------
+        Panda Dataframe
+            A Dataframe containing the concatenated string
+    
+        """
         # check dataframe is not empty
         if isinstance(self.dataframe, pd.DataFrame):
             # get comments from column. Column name may vary between comment and message
@@ -97,6 +188,20 @@ class Analyser:
 
     # colour cell based on value relative to boundaries
     def colour_sentiment(self, val):
+        """
+        set the colour to red, orange or green of a cell by categorising its value between boundaries
+
+        Parameters
+        ----------
+        val : int
+            The value to categorise
+
+        Returns
+        ----------
+        String
+            A formatted string stating the colour of the cell
+    
+        """
         if val < -self.boundary:
             colour = 'red'
         elif val < self.boundary:
@@ -106,7 +211,20 @@ class Analyser:
         return f'background-color: {colour}'
 
     def count_sentiments(self, dataset: pd.DataFrame):
-        boundary = 0.2
+        """
+        Count the number of positive, neutral and negative comments in a dataset
+
+        Parameters
+        ----------
+        dataset : Panda Dataframe
+            The dataset to search through 
+
+        Returns
+        ----------
+        Panda Dataframe
+            The total number of each category present in the dataset
+    
+        """
         # makes a separate dataframe for the number of sentiments out of all the comments
         negative = dataset.loc[dataset['compound'] < -self.boundary]
         positive = dataset.loc[dataset['compound'] > self.boundary]
@@ -119,22 +237,76 @@ class Analyser:
 
 
 def tokenize_words(comments: str):
-   # tokenize the whole string
+    """
+    Tokenize all comments
+
+    Parameters
+    ----------
+    comments : String
+        The comments to tokenize
+
+    Returns
+    ----------
+    String
+        A tokenize copy of the input comments
+
+    """
     return nltk.word_tokenize(comments)
 
 
 def remove_non_words(comments: str):
-    # remove any tokens which aren't words
+    """
+    Remove any tokens which aren't letters
+
+    Parameters
+    ----------
+    comments : String
+        The comments to sort through
+
+    Returns
+    ----------
+    String
+        A copy of the input comments without non alphabet letters (a-z)
+
+    """
     return [w for w in comments if w.isalpha()]
 
 
 def remove_stop_words(comments: str):
-    # remove stop words e.g. "to", "an", "a"
+    """
+    Remove stop words e.g. "to", "an", "a"
+
+    Parameters
+    ----------
+    comments : String
+        The comments to sort through
+
+    Returns
+    ----------
+    String
+        A copy of the input comments without stop words
+
+    """
+    
     stop_words = nltk.corpus.stopwords.words("english")
     return [w for w in comments if w.lower() not in stop_words]
 
 
 def parse_messages_for_analysis(comments: str):
+    """
+    Parse the comments for analysis
+
+    Parameters
+    ----------
+    comments : String
+        The comments to parse
+
+    Returns
+    ----------
+    String
+        A copy of the input comments without non-words and stop words
+
+    """
     tokenized = tokenize_words(comments)
     normal_words = remove_non_words(tokenized)
     all_words_without_stop_words = remove_stop_words(normal_words)

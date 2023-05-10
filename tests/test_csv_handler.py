@@ -3,6 +3,10 @@ import pandas as pd
 
 
 def test_write_to_csv() -> None:
+    """
+    Tests the write csv function
+
+    """
     test = {
         'col1': [1, 2, 3],
         'col2': [5, 6, 7]
@@ -14,6 +18,10 @@ def test_write_to_csv() -> None:
 
 
 def test_get_length_of_csv() -> None:
+    """
+    Tests the get length of csv function
+
+    """
     test = {
         'col1': [1, 2, 3],
         'col2': [5, 6, 7]
@@ -25,6 +33,10 @@ def test_get_length_of_csv() -> None:
 
 
 def test_remove_long_strings() -> None:
+    """
+    Tests the remove long strings function
+
+    """
     test = {
         'message': ['Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et',
                     'Lorem ipsum dolor sit amet. Sed enim voluptatem et modi debitis sit voluptatum voluptatem est eius cumque non quis doloribus eum itaque recusandae et ullam repellendus. Qui tenetur praesentium ut dolorem aliquam qui quae totam aut neque officiis est blanditiis quam. Ut galisum consequatur ea ipsa laborum eos incidunt voluptate non veritatis eligendi. 33 esse ipsam ut quia consequatur aut maxime deleniti? Est officiis velit quo ipsam quam et perspiciatis earum vel quis corrupti ab minus libero et molestiae necessitatibus.'
@@ -37,6 +49,10 @@ def test_remove_long_strings() -> None:
 
 
 def test_remove_na() -> None:
+    """
+    Tests the remove na function
+
+    """
     test = {
         'message': ['Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et',
                     None,
@@ -48,6 +64,10 @@ def test_remove_na() -> None:
 
 
 def test_pd_dataframe_to_csv() -> None:
+    """
+    Tests the pd dataframe to csv function
+
+    """
     test = {
         'col1': [1, 2, 3],
         'col2': [5, 6, 7]

@@ -5,6 +5,10 @@ from analyser import Analyser
 
 
 def about_UI():
+    """
+    Create the about section of the website
+
+    """
     st.title("About")
 
     st.write("""

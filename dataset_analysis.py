@@ -5,6 +5,15 @@ import chart
 
 
 def dataset_analysis_UI(number_of_rows):
+    """
+    Create the dataset section of the website
+
+    Parameters
+    ----------
+    number_of_rows : Int
+        The number of rows to show / analyse
+
+    """
     na = Analyser(number_of_comments=number_of_rows)
     st.title('Facebook Sentiment Analysis')
     st.write("""
@@ -74,15 +83,27 @@ def dataset_analysis_UI(number_of_rows):
         post_analysis_UI(na, False, "other")
 
 
-def post_analysis_UI(analyser: Analyser, nltk_analyser: bool, model: str):
+def post_analysis_UI(analyser: Analyser, nltk_analysis: bool, model: str):
+    """
+    Create the post section of the website
+
+    Parameters
+    ----------
+    analyser: Analyser
+        analyser object
+    nltk_analysis: bool
+        type of analysis to use (nltk / roberta)
+    model: str
+        the model to use 
+
+    """
     na = Analyser()
     #  Get unique post_ids
-    # need to change to post name on drop down
     selected_post_id = select_post(analyser)
 
     # Filter data and calculate sentiment
     filtered_data = analyser.filter_by_post(
-        selected_post_id, nltk_analyser).copy()
+        selected_post_id, nltk_analysis).copy()
 
     # Display post
     st.write("#### Post message: ")
@@ -133,6 +154,20 @@ def post_analysis_UI(analyser: Analyser, nltk_analyser: bool, model: str):
 
 
 def select_post(analyser: Analyser):
+    """
+    create select by post dropdown (select box)
+
+    Parameters
+    ----------
+    analyser: Analyser
+        analyser object
+
+    Returns
+    ----------
+    String
+        The Streamlit ID for the created select box
+
+    """
     # get unique posts
     unique_post_ids = analyser.sia_results["from_post_id"].unique()
     # create select box with all unique values

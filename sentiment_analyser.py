@@ -8,7 +8,27 @@ import numpy as np
 
 
 class Sentiment_Analyser:
+    """
+    A class which handles the analysis of a Panda Dataframe
 
+    Parameters
+    ----------
+    path=None, rows=1
+    path : String, optional
+        The path to a csv formatted dataset
+        If None then an empty Dataframe is created
+
+    rows : Int, optional
+        Only required if a path is given.
+        The number of comments within the csv to be read in as a Dataframe.
+
+    Attributes
+    ---------- 
+    dataframe : Panda Dataframe
+        Overall dataset
+    sia : Sentiment Intensity Analyzer
+        NLTK Sentiment analyzer 
+    """
     def __init__(self, path=None, rows=1):
         nltk.download('popular')
         nltk.download('vader_lexicon')
@@ -22,8 +42,18 @@ class Sentiment_Analyser:
         # allows pandas to use the full comment instead of shortening it
         pd.set_option('display.max_colwidth', None)
 
-    # calc nltk sentiment
+    
     def calc_nltk_sentiment(self):
+        """
+        Calc NLTK sentiment of dataframe
+
+        Returns
+        ----------
+        Panda Dataframe
+            A Dataframe containing the analysed sentiment of the original dataframe
+    
+        """
+
         nltk_analysis_results = []
         for index, row in (self.dataframe.iterrows()):
             # append the sentiment analysis results to a dictionary
@@ -43,6 +73,15 @@ class Sentiment_Analyser:
         return pd.DataFrame(nltk_analysis_results)
 
     def calc_roberta_sentiment(self):
+        """
+        Calc Roberta sentiment of dataframe
+
+        Returns
+        ----------
+        Panda Dataframe
+            A Dataframe containing the analysed sentiment of the original dataframe
+    
+        """
         roberta_analysis_results = []
 
         # obtain pre-trained model - https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment
@@ -66,8 +105,21 @@ class Sentiment_Analyser:
             roberta_analysis_results.append(roberta_sentiment_dict)
         return pd.DataFrame(roberta_analysis_results)
 
-    # load the roberta model in
+
     def load_roberta_model(self):
+        """
+        Load in the roberta model
+
+        Returns
+        ----------
+        String
+            model used
+        AutoTokenizer
+            tokenizer to parse strings
+        AutoModelForSequenceClassification
+            pre-trained roberta model
+    
+        """
         print("Roberta: Loading Model")
         MODEL = "cardiffnlp/twitter-roberta-base-sentiment"
 
@@ -80,6 +132,15 @@ class Sentiment_Analyser:
         return MODEL, tokenizer, model
 
     def roberta_sentiment(self, text_sample, MODEL, tokenizer, model):
+        """
+        Calc NLTK sentiment of text
+
+        Returns
+        ----------
+        List of Ints
+            A list of the NLTK results (negative, neutral, positive, compound)
+    
+        """
         # tokenizer encodes text to binary for the model to analyse
         encoded_text = tokenizer(
             text_sample, return_tensors='pt', truncation=True)
@@ -96,6 +157,15 @@ class Sentiment_Analyser:
         return scores
 
     def calc_nltk_sentiment_text(self, text_sample):
+        """
+        Calc NLTK sentiment of text
+
+        Returns
+        ----------
+        Panda Dataframe
+            The NLTK results (comment, negative, neutral, positive, compound)
+    
+        """
         sia_results = []
         sentiment_scores = self.sia.polarity_scores(text_sample)
         sia_sentiment_dict = {
@@ -110,6 +180,15 @@ class Sentiment_Analyser:
         return pd.DataFrame(sia_results)
 
     def calc_nltk_roberta_text(self, text_sample):
+        """
+        Calc Roberta sentiment of text
+
+        Returns
+        ----------
+        Panda Dataframe
+            The Roberta results (comment, negative, neutral, positive, compound)
+    
+        """
         roberta_results = []
         # obtain pre-trained model - https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment
         MODEL, tokenizer, model = self.load_roberta_model()
@@ -131,4 +210,20 @@ class Sentiment_Analyser:
 
 
 def calc_compound(negative, positive):
+    """
+        Calculate compound sentiment through the difference between positive and negative components
+
+        Parameters
+        ----------
+        negative : int
+            The negative sentiment
+        positive : int
+            The postive sentiment
+
+        Returns
+        ----------
+        Int
+            The difference between positive and negative (compound)
+    
+        """
     return positive - negative

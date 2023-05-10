@@ -4,17 +4,29 @@ import pandas as pd
 
 
 def test_tokenize_words() -> None:
+    """
+    Tests the tokenize words function
+
+    """
     tokenized = tokenize_words("This is a unit test.")
     assert tokenized == ['This', 'is', 'a', 'unit', 'test', '.']
 
 
 def test_remove_non_words() -> None:
+    """
+    Tests the remove non words function
+
+    """
     removed_non_words = remove_non_words("Unit test 2, testing!...")
     assert removed_non_words == ['U', 'n', 'i', 't', 't',
                                  'e', 's', 't', 't', 'e', 's', 't', 'i', 'n', 'g']
 
 
 def test_remove_stop_words() -> None:
+    """
+    Tests the remove stop words function
+
+    """
     removed_stop_words = remove_stop_words(
         "This is a unit test. Testing for a pass.")
     assert removed_stop_words == ['h', ' ', ' ', ' ', 'u', 'n', ' ',
@@ -22,6 +34,10 @@ def test_remove_stop_words() -> None:
 
 
 def test_parse_message_for_analysis() -> None:
+    """
+    Tests the parse message function
+
+    """
     parsed_words = parse_messages_for_analysis(
         "Unit testing 99. HopefullyThis! passes a test...")
     assert parsed_words == ['Unit', 'testing',
@@ -29,6 +45,10 @@ def test_parse_message_for_analysis() -> None:
 
 
 def test_calc_word_frequency() -> None:
+    """
+    Tests the calc word frequency function
+
+    """
     analyser = Analyser()
     analyser.all_comments = "four, four, four, four, three, three, three, two, two, one"
     common_words = analyser.calc_word_frequency()
