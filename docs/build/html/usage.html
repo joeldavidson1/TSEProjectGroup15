@@ -2,9 +2,12 @@
 <html class="no-js" lang="en">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="#" />
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
 
-    <!-- Generated with Sphinx 5.3.0 and Furo 2023.03.27 --><title>Search - Facebook Sentimental Analysis 0.2 documentation</title><link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <!-- Generated with Sphinx 5.3.0 and Furo 2023.03.27 -->
+        <title>Usage - Facebook Sentimental Analysis 0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
@@ -131,7 +134,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -145,7 +148,7 @@
   
   <span class="sidebar-brand-text">Facebook Sentimental Analysis 0.2 documentation</span>
   
-</a><form class="sidebar-search-container" method="get" action="#" role="search">
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
@@ -169,7 +172,8 @@
           <span>Back to top</span>
         </a>
         <div class="content-icon-container">
-          <div class="theme-toggle-container theme-toggle-content">
+          
+<div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -177,23 +181,50 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          
-<noscript>
-<div class="admonition error">
-  <p class="admonition-title">Error</p>
-  <p>
-    Please activate JavaScript to enable the search functionality.
-  </p>
-</div>
-</noscript>
-
-<div id="search-results"></div>
+          <section id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h1>
+<p>When running the program for the first time please follow the <a class="reference internal" href="#installation"><span class="std std-ref">installation</span></a> section first.</p>
+<p>To run the Streamlit app, enter into your terminal
+* streamlit run app.py
+The first time it may take a while downloading all the NLTK packages.</p>
+<p>To run unit tests,
+Ensure you’re in the project directory, enter into terminal ‘pytest’</p>
+<section id="installation">
+<span id="id1"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Make sure you are running python 3.7.9 use the windows x86 executable installer in vs code.</p></li>
+</ol>
+<p><a class="reference external" href="https://www.python.org/downloads/release/python-379/">https://www.python.org/downloads/release/python-379/</a></p>
+<p>In the bottom corner of vs code it should say the python version of your interpreter. if it’s incorrect select a different interpreter using ctrl + shift + p -&gt; select interpreter.</p>
+<p>create a venv using ctrl + shift + p then create environment and select the interpreter</p>
+<p>2. Run the following commands in the integrated terminal at the bottom of vs code:
+* python -m pip install –upgrade pip
+* python -m pip install -r requirements.txt</p>
+<p>test streamlit by running in terminal:
+* streamlit hello
+press Enter. After it should open a web page.</p>
+</section>
+<section id="unit-testing">
+<h2>Unit testing<a class="headerlink" href="#unit-testing" title="Permalink to this heading">#</a></h2>
+<p>Ensure you have pytest intalled, follow instructions above (already included in requirements.txt) or enter into terminal:</p>
+<p>pip install -U pytest</p>
+<p>To run pytest, ensure you’re in the project directory and enter into terminal ‘pytest’</p>
+</section>
+<section id="hosting">
+<h2>Hosting<a class="headerlink" href="#hosting" title="Permalink to this heading">#</a></h2>
+<p>The app is hosted using the release branch. Please see the url below:</p>
+<p><a class="reference external" href="https://joeldavidson1-tseprojectgroup15-app-release-4gxs7r.streamlit.app">https://joeldavidson1-tseprojectgroup15-app-release-4gxs7r.streamlit.app</a></p>
+<p>To host your own Streamlit application simply go to:</p>
+<p><a class="reference external" href="https://docs.streamlit.io/streamlit-community-cloud/get-started/deploy-an-app">https://docs.streamlit.io/streamlit-community-cloud/get-started/deploy-an-app</a></p>
+<p>and follow their instructions</p>
+</section>
+</section>
 
         </article>
       </div>
@@ -220,8 +251,29 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Usage</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#unit-testing">Unit testing</a></li>
+<li><a class="reference internal" href="#hosting">Hosting</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
@@ -233,8 +285,5 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/scripts/furo.js"></script>
-    
-<script src="_static/searchtools.js"></script>
-<script src="_static/language_data.js"></script>
-<script src="searchindex.js"></script></body>
+    </body>
 </html>

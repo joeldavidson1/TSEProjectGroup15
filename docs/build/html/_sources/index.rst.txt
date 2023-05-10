@@ -6,10 +6,17 @@
 Welcome to Facebook Sentimental Analysis's documentation!
 =========================================================
 
+**Facebook Sentimental Analysis** is a Streamlit based website for analysing facebook comments.  It uses a dataset from the `Jebencina’s Dataset <https://github.com/jbencina/facebook-new>`_ and hosts a *simple* and
+*informative* website.
+
+Check out the :doc:`usage` section for further information, including how to
+:ref:`install <installation>` the project.
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-
+   usage
+   api
 
 
 Indices and tables
