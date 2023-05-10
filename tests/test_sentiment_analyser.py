@@ -61,6 +61,10 @@ def test_calc_robert_sentiment_text() -> None:
 
 
 def test_calc_nltk_sentiment() -> None:
+    """
+    Tests the calc nlyk sentiment function
+
+    """
     sia = Sentiment_Analyser()
     sia_data = {'message': 'This is good sample text',
                 'from_post_id': '012_111'
@@ -81,6 +85,10 @@ def test_calc_nltk_sentiment() -> None:
 
 
 def test_calc_roberta_sentiment() -> None:
+    """
+    Tests the calc roberta sentiment function
+
+    """
     sia = Sentiment_Analyser()
     sia_data = {'message': 'This is good sample text',
                 'from_post_id': '012_111'
@@ -101,6 +109,10 @@ def test_calc_roberta_sentiment() -> None:
 
 
 def test_load_roberta_model() -> None:
+    """
+    Tests the load roberta model function
+
+    """
     sia = Sentiment_Analyser()
     MODEL = "cardiffnlp/twitter-roberta-base-sentiment"
     tokenizer = AutoTokenizer.from_pretrained(
@@ -116,6 +128,10 @@ def test_load_roberta_model() -> None:
 
 
 def test_roberta_sentiment() -> None:
+    """
+    Tests the roberta sentiment function
+
+    """
     sia = Sentiment_Analyser()
     MODEL = "cardiffnlp/twitter-roberta-base-sentiment"
     tokenizer = AutoTokenizer.from_pretrained(
