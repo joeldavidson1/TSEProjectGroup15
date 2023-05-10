@@ -12,6 +12,38 @@ from sentiment_analyser import Sentiment_Analyser
 
 
 class Analyser:
+    """
+    A class which handles the analysis of a Panda Dataframe
+
+    Parameters
+    ----------
+    input_dataframe : Panda Dataframe, optional
+        A Dataframe that needs to be analysed.
+        If None then a Dataframe is read in from the default csv
+
+    number_of_comments : int, optional
+        Only required if no Dataframe is given.
+        The number of comments within the csv to be read in as a Dataframe.
+
+    Attributes
+    ---------- 
+    analyser : Analyser
+        analyser object 
+    dataframe : Panda Dataframe
+        overall dataset
+    sia_results : Panda Dataframe
+        nltk sentiment results
+    roberta_results : Panda Dataframe
+        roberta sentiment results
+    posts_dataframe : Panda Dataframe  
+        dataset post references
+    all_comments : list of str
+        list of all comments
+    word_frequency : list of Dict (word and frequency)
+        list of all words and their frequencies
+    boundary : int
+        boundary used for sentiment categorising
+    """
     def __init__(self, input_dataframe=None, number_of_comments=1):
         self.analyser = Sentiment_Analyser()
 
@@ -106,7 +138,6 @@ class Analyser:
         return f'background-color: {colour}'
 
     def count_sentiments(self, dataset: pd.DataFrame):
-        boundary = 0.2
         # makes a separate dataframe for the number of sentiments out of all the comments
         negative = dataset.loc[dataset['compound'] < -self.boundary]
         positive = dataset.loc[dataset['compound'] > self.boundary]

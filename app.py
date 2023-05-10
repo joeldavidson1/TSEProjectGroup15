@@ -11,11 +11,8 @@ number_of_comments = 2500  # number of comments to analyze
 # allows heavy computation to run only once
 def pre_compute_analysis():
     """
-    Analyse dataset once and save results as csv's
-
-    Parameters
-    ----------
-    None
+    Analyse the dataset once and save results as csv's
+    using the Precompute class
 
     """
     p = Precompute()

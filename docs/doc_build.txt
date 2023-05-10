@@ -1,0 +1,11 @@
+To help alter the docs the following needs to be installed:
+pip install sphinx
+pip install sphinx-autobuild
+pip install furo
+
+Then run the command:
+sphinx-autobuild -b html docs/source/ docs/build/html
+
+To add functions use the NumPy style docstrings within functions:
+
+https://numpydoc.readthedocs.io/en/latest/format.html

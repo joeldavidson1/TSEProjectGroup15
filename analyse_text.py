@@ -7,6 +7,10 @@ import csv_handler
 
 
 def analyse_text_UI():
+    """
+    Create the dataset analysis section of the website
+
+    """
     st.title("Analyse your own text here")
     st.sidebar.write("""
     ## About

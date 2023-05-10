@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="Usage" href="usage.html" />
 
     <!-- Generated with Sphinx 5.3.0 and Furo 2023.03.27 -->
-        <title>Code Usage - Facebook Sentimental Analysis 0.2 documentation</title>
+        <title>Code - Facebook Sentimental Analysis 0.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -134,7 +134,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -157,7 +157,7 @@
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Code Usage</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Code</a></li>
 </ul>
 
 </div>
@@ -186,14 +186,161 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="code-usage">
-<h1>Code Usage<a class="headerlink" href="#code-usage" title="Permalink to this heading">#</a></h1>
+          <section id="code">
+<h1>Code<a class="headerlink" href="#code" title="Permalink to this heading">#</a></h1>
+<section id="module-app">
+<span id="app"></span><h2>App<a class="headerlink" href="#module-app" title="Permalink to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="app.pre_compute_analysis">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">pre_compute_analysis</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.pre_compute_analysis" title="Permalink to this definition">#</a></dt>
+<dd><p>Analyse the dataset once and save results as csv’s
+using the Precompute class</p>
+</dd></dl>
+
+</section>
+<section id="module-about">
+<span id="about"></span><h2>About<a class="headerlink" href="#module-about" title="Permalink to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="about.about_UI">
+<span class="sig-prename descclassname"><span class="pre">about.</span></span><span class="sig-name descname"><span class="pre">about_UI</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#about.about_UI" title="Permalink to this definition">#</a></dt>
+<dd><p>Create the about section of the website</p>
+</dd></dl>
+
+</section>
+<section id="analyse-text">
+<h2>Analyse Text<a class="headerlink" href="#analyse-text" title="Permalink to this heading">#</a></h2>
+<span class="target" id="module-analyse_text"></span><dl class="py function">
+<dt class="sig sig-object py" id="analyse_text.analyse_text_UI">
+<span class="sig-prename descclassname"><span class="pre">analyse_text.</span></span><span class="sig-name descname"><span class="pre">analyse_text_UI</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#analyse_text.analyse_text_UI" title="Permalink to this definition">#</a></dt>
+<dd><p>Create the dataset analysis section of the website</p>
+</dd></dl>
+
+</section>
+<section id="analyser">
+<h2>Analyser<a class="headerlink" href="#analyser" title="Permalink to this heading">#</a></h2>
+<span class="target" id="module-analyser"></span><dl class="py class">
+<dt class="sig sig-object py" id="analyser.Analyser">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">analyser.</span></span><span class="sig-name descname"><span class="pre">Analyser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#analyser.Analyser" title="Permalink to this definition">#</a></dt>
+<dd><p>A class which handles the analysis of a Panda Dataframe</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dataframe</strong> (<em>Panda Dataframe</em><em>, </em><em>optional</em>) – A Dataframe that needs to be analysed.
+If None then a Dataframe is read in from the default csv</p></li>
+<li><p><strong>number_of_comments</strong> (<em>int</em><em>, </em><em>optional</em>) – Only required if no Dataframe is given.
+The number of comments within the csv to be read in as a Dataframe.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="analyser.Analyser.analyser">
+<span class="sig-name descname"><span class="pre">analyser</span></span><a class="headerlink" href="#analyser.Analyser.analyser" title="Permalink to this definition">#</a></dt>
+<dd><p>analyser object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#analyser.Analyser" title="analyser.Analyser">Analyser</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="analyser.Analyser.dataframe">
+<span class="sig-name descname"><span class="pre">dataframe</span></span><a class="headerlink" href="#analyser.Analyser.dataframe" title="Permalink to this definition">#</a></dt>
+<dd><p>overall dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Panda Dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="analyser.Analyser.sia_results">
+<span class="sig-name descname"><span class="pre">sia_results</span></span><a class="headerlink" href="#analyser.Analyser.sia_results" title="Permalink to this definition">#</a></dt>
+<dd><p>nltk sentiment results</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Panda Dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="analyser.Analyser.roberta_results">
+<span class="sig-name descname"><span class="pre">roberta_results</span></span><a class="headerlink" href="#analyser.Analyser.roberta_results" title="Permalink to this definition">#</a></dt>
+<dd><p>roberta sentiment results</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Panda Dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="analyser.Analyser.posts_dataframe">
+<span class="sig-name descname"><span class="pre">posts_dataframe</span></span><a class="headerlink" href="#analyser.Analyser.posts_dataframe" title="Permalink to this definition">#</a></dt>
+<dd><p>dataset post references</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Panda Dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="analyser.Analyser.all_comments">
+<span class="sig-name descname"><span class="pre">all_comments</span></span><a class="headerlink" href="#analyser.Analyser.all_comments" title="Permalink to this definition">#</a></dt>
+<dd><p>list of all comments</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="analyser.Analyser.word_frequency">
+<span class="sig-name descname"><span class="pre">word_frequency</span></span><a class="headerlink" href="#analyser.Analyser.word_frequency" title="Permalink to this definition">#</a></dt>
+<dd><p>list of all words and their frequencies</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of Dict (word and frequency)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="analyser.Analyser.boundary">
+<span class="sig-name descname"><span class="pre">boundary</span></span><a class="headerlink" href="#analyser.Analyser.boundary" title="Permalink to this definition">#</a></dt>
+<dd><p>boundary used for sentiment categorising</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-chart">
+<span id="chart"></span><h2>Chart<a class="headerlink" href="#module-chart" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="csv-handler">
+<h2>CSV Handler<a class="headerlink" href="#csv-handler" title="Permalink to this heading">#</a></h2>
+<span class="target" id="module-csv_handler"></span></section>
+<section id="dataset-analysis">
+<h2>Dataset Analysis<a class="headerlink" href="#dataset-analysis" title="Permalink to this heading">#</a></h2>
+<span class="target" id="module-dataset_analysis"></span></section>
+<section id="precompute">
+<h2>Precompute<a class="headerlink" href="#precompute" title="Permalink to this heading">#</a></h2>
+<span class="target" id="module-precompute"></span></section>
 </section>
 
         </article>
@@ -231,8 +378,56 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Code</a><ul>
+<li><a class="reference internal" href="#module-app">App</a><ul>
+<li><a class="reference internal" href="#app.pre_compute_analysis"><code class="docutils literal notranslate"><span class="pre">pre_compute_analysis()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-about">About</a><ul>
+<li><a class="reference internal" href="#about.about_UI"><code class="docutils literal notranslate"><span class="pre">about_UI()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#analyse-text">Analyse Text</a><ul>
+<li><a class="reference internal" href="#analyse_text.analyse_text_UI"><code class="docutils literal notranslate"><span class="pre">analyse_text_UI()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#analyser">Analyser</a><ul>
+<li><a class="reference internal" href="#analyser.Analyser"><code class="docutils literal notranslate"><span class="pre">Analyser</span></code></a><ul>
+<li><a class="reference internal" href="#analyser.Analyser.analyser"><code class="docutils literal notranslate"><span class="pre">Analyser.analyser</span></code></a></li>
+<li><a class="reference internal" href="#analyser.Analyser.dataframe"><code class="docutils literal notranslate"><span class="pre">Analyser.dataframe</span></code></a></li>
+<li><a class="reference internal" href="#analyser.Analyser.sia_results"><code class="docutils literal notranslate"><span class="pre">Analyser.sia_results</span></code></a></li>
+<li><a class="reference internal" href="#analyser.Analyser.roberta_results"><code class="docutils literal notranslate"><span class="pre">Analyser.roberta_results</span></code></a></li>
+<li><a class="reference internal" href="#analyser.Analyser.posts_dataframe"><code class="docutils literal notranslate"><span class="pre">Analyser.posts_dataframe</span></code></a></li>
+<li><a class="reference internal" href="#analyser.Analyser.all_comments"><code class="docutils literal notranslate"><span class="pre">Analyser.all_comments</span></code></a></li>
+<li><a class="reference internal" href="#analyser.Analyser.word_frequency"><code class="docutils literal notranslate"><span class="pre">Analyser.word_frequency</span></code></a></li>
+<li><a class="reference internal" href="#analyser.Analyser.boundary"><code class="docutils literal notranslate"><span class="pre">Analyser.boundary</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-chart">Chart</a></li>
+<li><a class="reference internal" href="#csv-handler">CSV Handler</a></li>
+<li><a class="reference internal" href="#dataset-analysis">Dataset Analysis</a></li>
+<li><a class="reference internal" href="#precompute">Precompute</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
