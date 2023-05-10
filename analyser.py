@@ -78,6 +78,22 @@ class Analyser:
         self.boundary = 0.1
 
     def analyse_comment(self, nltk_analysis: bool, comment: str):
+        """
+        Analyse an individual comment
+
+        Parameters
+        ----------
+        nltk_analysis : bool
+            whether to use nltk or roberta for the analysis
+        comment : string
+            The comment to be analysed
+
+        Returns
+        ----------
+        Panda Dataframe
+            A Dataframe containing the comment and its analysed sentiment
+    
+        """
         analysed_comment = pd.DataFrame()
 
         if nltk_analysis:

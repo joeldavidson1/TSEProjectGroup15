@@ -326,6 +326,26 @@ The number of comments within the csv to be read in as a Dataframe.</p></li>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="analyser.Analyser.analyse_comment">
+<span class="sig-name descname"><span class="pre">analyse_comment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nltk_analysis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#analyser.Analyser.analyse_comment" title="Permalink to this definition">#</a></dt>
+<dd><p>Analyse an individual comment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nltk_analysis</strong> (<em>bool</em>) – whether to use nltk or roberta for the analysis</p></li>
+<li><p><strong>comment</strong> (<em>string</em>) – The comment to be analysed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A Dataframe containing the comment and its analysed sentiment</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>analysed_comment (Panda Dataframe)</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -413,6 +433,7 @@ The number of comments within the csv to be read in as a Dataframe.</p></li>
 <li><a class="reference internal" href="#analyser.Analyser.all_comments"><code class="docutils literal notranslate"><span class="pre">Analyser.all_comments</span></code></a></li>
 <li><a class="reference internal" href="#analyser.Analyser.word_frequency"><code class="docutils literal notranslate"><span class="pre">Analyser.word_frequency</span></code></a></li>
 <li><a class="reference internal" href="#analyser.Analyser.boundary"><code class="docutils literal notranslate"><span class="pre">Analyser.boundary</span></code></a></li>
+<li><a class="reference internal" href="#analyser.Analyser.analyse_comment"><code class="docutils literal notranslate"><span class="pre">Analyser.analyse_comment()</span></code></a></li>
 </ul>
 </li>
 </ul>
