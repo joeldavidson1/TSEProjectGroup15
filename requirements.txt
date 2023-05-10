@@ -8,3 +8,4 @@ pytest-cov
 torch
 scipy
 transformers
+altair
