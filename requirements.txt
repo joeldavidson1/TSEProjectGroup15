@@ -9,3 +9,4 @@ torch
 scipy
 transformers
 altair
+numpy
