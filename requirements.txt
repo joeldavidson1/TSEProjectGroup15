@@ -1,5 +1,6 @@
 numpy
-altair vega_datasets
+vega_datasets
+altair 
 nltk==3.8.1
 pandas==1.3.5
 plotly==5.13.1
